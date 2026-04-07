@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Journey\HomeController;
 
 Route::get('/', function () {
-    dd('https://wn.in.th');
+    // dd('https://wn.in.th');
+
+    dd(is_writable('/var/www/wn/journey.sqlite'));
 });
 
 Route::get('journey/summary_tp', [HomeController::class, 'summary_tp']);
