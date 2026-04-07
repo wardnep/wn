@@ -12,6 +12,10 @@ Route::get('/', function () {
         if ($item2) {
             $item1->strategy = $item2->strategy;
             $item1->save();
+
+            echo $item1->strategy + " " + $item2->strategy."<br />";
+        } else {
+            echo $item1->id + " not found<br />";
         }
     }
 
