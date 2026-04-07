@@ -23,4 +23,4 @@ Route::get('journey/summary', [HomeController::class, 'summary']);
 Route::post('journey/note', [HomeController::class, 'note']);
 Route::get('journey/delete/{journey_id}/{edit_journey_item_id}', [HomeController::class, 'delete']);
 Route::get('journey/{select_journey_id?}/{edit_journey_item_id?}/{sort_column?}/{sort_direction?}', [HomeController::class, 'index']);
-Route::post('journey', 'JourneyController@storeOrUpdate');
+Route::post('journey', [HomeController::class, 'storeOrUpdate']);
