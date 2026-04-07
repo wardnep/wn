@@ -136,7 +136,7 @@
                                     <input type="hidden" name="page" value="{{ $journey_items->currentPage() }}" />
                                     <tr>
                                         <td>
-                                            <input type="text" name="date" class="form-control datepicker" data-provide="datepicker" data-date-language="th-th" placeholder="วัน/เดือน/ปี" value="{{ $edit_journey_item ? $edit_journey_item->date : $default_date }}" readonly />
+                                            <input type="text" name="date" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->date : $default_date }}" />
                                         </td>
                                         <td>
                                             <select class="form-control" name="entry_session">
