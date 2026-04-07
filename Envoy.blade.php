@@ -10,9 +10,6 @@
 	ln -s ../env .env
 	rm -rf storage
 	ln -s ../storage storage
-	cd database
-	ln -s ../../journey.sqlite journey.sqlite
-	cd ..
 	php artisan migrate --no-interaction
 	php artisan optimize
 	php artisan config:clear
