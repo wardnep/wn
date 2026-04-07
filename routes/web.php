@@ -7,7 +7,7 @@ use App\Http\Controllers\Journey\HomeController;
 Route::get('/', function () {
     // dd('https://wn.in.th');
 
-    foreach (App\Models\JourneyItem::all() as $item1) {
+    foreach (App\Models\JourneyItem::whereIn('journey_id', [9, 10, 11, 12]) as $item1) {
         $item2 = App\Models\JourneyItem2::find($item1->id);
         if ($item2) {
             $item1->strategy = $item2->strategy;
