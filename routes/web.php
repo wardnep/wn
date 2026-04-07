@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dd('https://wn.in.th 1');
+    return view('journey.home');
 });
