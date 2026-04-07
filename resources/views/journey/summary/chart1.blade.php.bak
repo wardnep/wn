@@ -1,0 +1,92 @@
+<div id="chart1" style="width: 1500px; height: 400px;"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.2/echarts.min.js" integrity="sha512-weWXHm0Ws2cZKjjwugRMnnOAx9uCP/wUVf84W7/fXQimwYUK28zPDGPprDozomQLpKv6U99xN9PI9+yLI9qxNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    var option1 = {
+        title: {
+            text: 'Profit/Loss'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['profit', 'loss']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: [
+                @foreach ($items as $item)
+                    @if ($loop->first)
+                        '{{ $item->date }}',
+                    @elseif ($loop->last)
+                        '{{ $item->date }}'
+                    @else
+                        '',
+                    @endif
+                @endforeach
+            ],
+            axisLabel: {
+                // Rotate labels to 90 degrees (vertical)
+                rotate: 60,
+                // Force all labels to show
+                interval: 0
+            }
+        },
+        yAxis: {
+            type: 'value',
+            // min: Math.min([
+            //     @foreach ($items as $item)
+            //         {{ $item->profit }}{{ !$loop->last ? ',' : '' }}
+            //     @endforeach
+            // ]),
+            // max: Math.max([
+            //     @foreach ($items as $item)
+            //         {{ $item->profit }}{{ !$loop->last ? ',' : '' }}
+            //     @endforeach
+            // ])
+        },
+        series: [{
+                name: 'profit',
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                areaStyle: {},
+                stack: 'Total',
+                itemStyle: {color: 'red'},
+                data: [
+                    @foreach ($items as $item)
+                        {{ $item->profit }}{{ !$loop->last ? ',' : '' }}
+                    @endforeach
+                ]
+            },
+            {
+                name: 'loss',
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                areaStyle: {},
+                stack: 'Total',
+                itemStyle: {color: 'green'},
+                data: [
+                    @foreach ($items as $item)
+                        {{ $item->loss }}{{ !$loop->last ? ',' : '' }}
+                    @endforeach
+                ]
+            }
+        ]
+    };
+
+    var myChart1 = echarts.init(document.getElementById('chart1'));
+    myChart1.setOption(option1);
+</script>

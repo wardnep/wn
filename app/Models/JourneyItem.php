@@ -12,7 +12,7 @@ class JourneyItem extends Model
 
     public function journey()
     {
-        return $this->belongsTo('App\Journey');
+        return $this->belongsTo('App\Models\Journey');
     }
 
     public function getDEntrySessionAttribute()

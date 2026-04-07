@@ -11,6 +11,6 @@ class Journey extends Model
 
     public function items()
     {
-        return $this->hasMany('App\JourneyItem');
+        return $this->hasMany('App\Models\JourneyItem');
     }
 }
