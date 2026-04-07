@@ -27,4 +27,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('journey', [HomeController::class, 'storeOrUpdate']);
 });
 
-Auth::routes(['register' => true]);
+Auth::routes(['register' => false]);
