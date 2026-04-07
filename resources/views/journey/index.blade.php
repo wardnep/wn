@@ -121,7 +121,7 @@
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="10" align="right">
+                                    <td colspan="12" align="right">
                                         <div align="right">
                                             {{ $journey_items->appends([
                                                 'select_journey_id' => $select_journey ? $select_journey->id : 0
@@ -208,7 +208,7 @@
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td colspan="9">
+                                        <td colspan="10">
                                             <input type="text" name="note" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->note : "" }}" />
                                         </td>
                                         <td></td>
@@ -218,9 +218,6 @@
                         </table>
                     </div>
                 </div>
-                {{-- @if ($select_journey->id == 3 || $select_journey->id == 4)
-                    @include('journey.summary.chart2')
-                @endif --}}
             </div>
         </div>
     </section>
