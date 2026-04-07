@@ -95,6 +95,7 @@ class HomeController extends Controller
         $item->tp1 = $request->tp1 ?: 0;
         $item->tp2 = $request->tp2 ?: 0;
         $item->result_r1 = $request->result_r1 ?: 0;
+        $item->result_r2 = '';
         $item->grade = $request->grade ?: '';
         $item->strategy = $request->strategy ?: '';
         $item->note = $request->note ?: '';
