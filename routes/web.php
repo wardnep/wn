@@ -7,7 +7,7 @@ use App\Http\Controllers\Journey\HomeController;
 Route::get('/', function () {
     // dd('https://wn.in.th');
 
-    dd(is_writable('/var/www/wn/journey.sqlite'));
+    dd(get_current_user(), exec('whoami'));
 });
 
 Route::get('journey/summary_tp', [HomeController::class, 'summary_tp']);
