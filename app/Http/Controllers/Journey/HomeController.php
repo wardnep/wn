@@ -67,8 +67,6 @@ class HomeController extends Controller
             );
 
             $item->image = $image_path;
-        } else {
-            $item->image = '';
         }
 
         if ($request->image2) {
@@ -85,8 +83,6 @@ class HomeController extends Controller
             );
 
             $item->image2 = $image2_path;
-        } else {
-            $item->image2 = '';
         }
 
         $item->journey_id = $request->select_journey_id;
