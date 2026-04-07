@@ -59,7 +59,7 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Date</th>
+                                    <th width="150px">Date</th>
                                     <th>Entry</th>
                                     <th>Exit</th>
                                     <th>Position</th>
@@ -67,7 +67,7 @@
                                     <th width="100px">Size</th>
                                     <th>R</th>
                                     <th>Strategy</th>
-                                    <th>Grade</th>
+                                    <th width="100px">Grade</th>
                                     <th>Before</th>
                                     <th>After</th>
                                     <th></th>

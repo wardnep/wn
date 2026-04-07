@@ -7,7 +7,15 @@ use App\Http\Controllers\Journey\HomeController;
 Route::get('/', function () {
     // dd('https://wn.in.th');
 
-    dd(get_current_user(), exec('whoami'));
+    foreach (App\Models\JourneyItem::all() as $item1) {
+        $item2 = App\Models\JourneyItem2::find($item1->id);
+        if ($item2) {
+            $item1->strategy = $item2->strategy;
+            $item1->save();
+        }
+    }
+
+    dd('Done!');
 });
 
 Route::get('journey/summary_tp', [HomeController::class, 'summary_tp']);
