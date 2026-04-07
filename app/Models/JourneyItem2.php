@@ -9,6 +9,6 @@ class JourneyItem2 extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql_second';
+    protected $connection = 'mysql';
     protected $table = 'journey_items';
 }
