@@ -12,7 +12,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-11">
-                            <textarea class="form-control" name="sql">{{ $sql }}</textarea>
+                            <textarea class="form-control" name="sql">{{ isset($sql) ? $sql : '' }}</textarea>
                         </div>
                         <div class="col-md-1">
                             <button type="submit" class="btn btn-success">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </form>
-                @if ($results)
+                @if (isset($results) && $results)
                     <div class="row">
                         <div class="col-md-12">
                             <table class="table table-striped">
