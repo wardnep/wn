@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Journey;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use Rap2hpoutre\FastExcel\FastExcel;
 use App\Models\Journey;
 use App\Models\JourneyItem;
 
-class HomeController extends Controller
+class JourneyController extends Controller
 {
     public function index(Request $request, $select_journey_id = 12, $edit_journey_item_id = 0, $sort_column = 'id', $sort_direction = 'ASC')
     {
