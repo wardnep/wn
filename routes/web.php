@@ -5,12 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JourneyController;
 use App\Http\Controllers\SQLController;
+use App\Http\Controllers\QuantController;
 
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('sql', [SQLController::class, 'index']);
     Route::post('execution', [SQLController::class, 'execution']);
+
+    Route::get('quant', [QuantController::class, 'index']);
 
     Route::get('journey/summary_tp', [JourneyController::class, 'summary_tp']);
     Route::get('journey/summary_tp1/{exclude_asia}/{exclude_london}/{exclude_london_ny}/{exclude_ny}', [JourneyController::class, 'summary_tp1']);
