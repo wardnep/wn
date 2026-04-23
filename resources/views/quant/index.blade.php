@@ -30,7 +30,7 @@
                                 @foreach ($logs as $log)
                                     <tr>
                                         <td>{{ $log->note }}</td>
-                                        <td>{{ $log->created_at }}</td>
+                                        <td width="200px">{{ $log->created_at }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
