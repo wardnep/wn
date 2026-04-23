@@ -16,9 +16,11 @@ class SQLController extends Controller
     public function execution(Request $request)
     {
         $sql = $request->sql;
-        $results = DB::connection($request->connection)->select($sql, []);
+        $connection = $request->connection;
+
+        $results = DB::connection($connection)->select($sql, []);
         $headers = array_keys((array) $results[0]);
 
-        return view('sql.index', compact('sql', 'results', 'headers'));
+        return view('sql.index', compact('sql', 'connection', 'results', 'headers'));
     }
 }

@@ -11,8 +11,8 @@
                 <div class="row">
                     <div class="col-md-11">
                         <select class="form-control" name="connection">
-                            <option value="sqlite">wn</option>
-                            <option value="sqlite2">wn-quent</option>
+                            <option value="sqlite" {{ isset($connection) && $connection == 'sqlite' ? 'selected' : '' }}>wn</option>
+                            <option value="sqlite2" {{ isset($connection) && $connection == 'sqlite2' ? 'selected' : '' }}>wn-quent</option>
                         </select>
                     </div>
                     <div class="col-md-1"></div>
