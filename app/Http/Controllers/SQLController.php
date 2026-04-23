@@ -18,6 +18,8 @@ class SQLController extends Controller
         $sql = $request->sql;
         $connection = $request->connection;
 
+        // dd($connection, $sql);
+
         $results = DB::connection($connection)->select($sql, []);
         $headers = array_keys((array) $results[0]);
 

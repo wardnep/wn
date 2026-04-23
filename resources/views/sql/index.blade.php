@@ -8,20 +8,21 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-body">
-                <div class="row">
-                    <div class="col-md-11">
-                        <select class="form-control" name="connection">
-                            <option value="sqlite" {{ isset($connection) && $connection == 'sqlite' ? 'selected' : '' }}>wn</option>
-                            <option value="sqlite2" {{ isset($connection) && $connection == 'sqlite2' ? 'selected' : '' }}>wn-quent</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
                 <form method="POST" action="{{ url('execution') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-11">
+                            <select class="form-control" name="connection">
+                                <option value="sqlite" {{ isset($connection) && $connection == 'sqlite' ? 'selected' : '' }}>wn</option>
+                                <option value="sqlite2" {{ isset($connection) && $connection == 'sqlite2' ? 'selected' : '' }}>wn-quent</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11">
                             <textarea class="form-control" name="sql">{{ isset($sql) ? $sql : '' }}</textarea>
+                            SELECT name FROM sqlite_master WHERE type='table';
                         </div>
                         <div class="col-md-1">
                             <button type="submit" class="btn btn-success">
