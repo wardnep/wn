@@ -51,10 +51,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            SELECT name FROM sqlite_master WHERE type='table';
                         </div>
                     </div>
                 @endif
+                SELECT name FROM sqlite_master WHERE type='table';
             </div>
         </div>
     </section>
