@@ -22,7 +22,6 @@
                     <div class="row">
                         <div class="col-md-11">
                             <textarea class="form-control" name="sql">{{ isset($sql) ? $sql : '' }}</textarea>
-                            SELECT name FROM sqlite_master WHERE type='table';
                         </div>
                         <div class="col-md-1">
                             <button type="submit" class="btn btn-success">
@@ -52,6 +51,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            SELECT name FROM sqlite_master WHERE type='table';
                         </div>
                     </div>
                 @endif
