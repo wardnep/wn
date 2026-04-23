@@ -8,7 +8,7 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-body">
-                <form method="POST" action="{{ url('execution') }}">
+                <form method="POST" action="{{ url('sql/execution') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-11">

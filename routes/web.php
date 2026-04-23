@@ -11,7 +11,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('sql', [SQLController::class, 'index']);
-    Route::post('execution', [SQLController::class, 'execution']);
+    Route::post('sql/execution', [SQLController::class, 'execution']);
 
     Route::get('quant', [QuantController::class, 'index']);
 
