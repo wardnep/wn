@@ -14,8 +14,16 @@ class QuantController extends Controller
         $response = Http::get('http://34.158.61.206:5000/status');
         $data = $response->json();
 
+        return view('quant.index', compact('data'));
+    }
+
+    public function logs(Request $request)
+    {
+        $response = Http::get('http://34.158.61.206:5000/status');
+        $data = $response->json();
+
         $logs = DB::connection('sqlite2')->select('select * from logs order by id desc', []);
 
-        return view('quant.index', compact('data', 'logs'));
+        return view('quant.log', compact('data', 'logs'));
     }
 }

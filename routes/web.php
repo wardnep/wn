@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('sql/execution', [SQLController::class, 'execution']);
 
     Route::get('quant', [QuantController::class, 'index']);
+    Route::get('quant/logs', [QuantController::class, 'logs']);
 
     Route::get('journey/summary_tp', [JourneyController::class, 'summary_tp']);
     Route::get('journey/summary_tp1/{exclude_asia}/{exclude_london}/{exclude_london_ny}/{exclude_ny}', [JourneyController::class, 'summary_tp1']);

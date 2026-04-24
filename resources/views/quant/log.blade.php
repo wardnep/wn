@@ -1,7 +1,7 @@
 @extends('_layouts.app')
 
 @section('title')
-    Wn Quant
+    Wn Quant - Logging
 @endsection
 
 @section('content')
@@ -16,15 +16,25 @@
                             @else
                                 <button type="button" class="btn btn-danger"></button>
                             @endif
-                        </a> <a href="{{ url('quant/logs') }}"><u>Logs</u></a>
+                        </a> <a href="{{ url('quant') }}"><u>Orders</u></a>
                     </div>
                     <div class="col-md-12">
                         <table class="table table-striped">
                             <thead>
-                                <tr></tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Note</th>
+                                    <th>Created At</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr></tr>
+                                @foreach ($logs as $log)
+                                    <tr>
+                                        <td>{{ $log->id }}</td>
+                                        <td>{{ $log->note }}</td>
+                                        <td width="200px">{{ $log->created_at }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
