@@ -21,11 +21,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-11">
-                            <textarea class="form-control" name="sql">{{ isset($sql) ? $sql : '' }}</textarea>
+                            <textarea class="form-control" name="sql">{{ isset($sql) ? $sql : "SELECT name FROM sqlite_master WHERE type='table';" }}</textarea>
                         </div>
                         <div class="col-md-1">
                             <button type="submit" class="btn btn-success">
-                                <span class="fas fa-save" />
+                                <i class="fa fa-play"></i>
                             </button>
                         </div>
                     </div>
@@ -54,7 +54,6 @@
                         </div>
                     </div>
                 @endif
-                SELECT name FROM sqlite_master WHERE type='table';
             </div>
         </div>
     </section>

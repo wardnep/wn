@@ -22,6 +22,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Note</th>
                                     <th>Created At</th>
                                 </tr>
@@ -29,6 +30,7 @@
                             <tbody>
                                 @foreach ($logs as $log)
                                     <tr>
+                                        <td>{{ $log->id }}</td>
                                         <td>{{ $log->note }}</td>
                                         <td width="200px">{{ $log->created_at }}</td>
                                     </tr>
