@@ -31,9 +31,8 @@ class JourneyController extends Controller
         $edit_journey_item = JourneyItem::find($request->edit_journey_item_id);
 
         $query = JourneyItem::where('journey_id', $select_journey_id);
-        // $query->where('entry_session', '<>', 'London');
 
-        $journey_items = $query->simplePaginate(20);
+        $journey_items = $query->simplePaginate(50);
 
         if ($select_journey->items() && $select_journey->items()->latest()->first()) {
             $default_date = $select_journey->items()->latest()->first()->date;
