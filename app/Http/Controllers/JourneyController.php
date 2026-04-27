@@ -267,4 +267,15 @@ class JourneyController extends Controller
     {
         return view('journey.summary.summary_tp2', compact('exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
     }
+
+    public function test()
+    {
+        $items = JourneyItem::where('journey_id', 12)->get();
+        foreach ($items as $item) {
+            $item->size = '1%';
+            $item->save();
+        }
+
+        dd('done');
+    }
 }

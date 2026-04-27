@@ -64,7 +64,7 @@
                                     <th>Exit</th>
                                     <th>Position</th>
                                     <th>Result</th>
-                                    <th width="100px">SL</th>
+                                    <th width="100px">Risk</th>
                                     <th>R</th>
                                     <th>Strategy</th>
                                     <th width="100px">Grade</th>
