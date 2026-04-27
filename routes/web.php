@@ -10,8 +10,8 @@ use App\Http\Controllers\QuantController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('sql', [SQLController::class, 'index']);
-    Route::post('sql/execution', [SQLController::class, 'execution']);
+    // Route::get('sql', [SQLController::class, 'index']);
+    // Route::post('sql/execution', [SQLController::class, 'execution']);
 
     Route::get('quant', [QuantController::class, 'index']);
     Route::get('quant/logs', [QuantController::class, 'logs']);
