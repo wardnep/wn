@@ -10,9 +10,6 @@ use App\Http\Controllers\QuantController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-    // Route::get('sql', [SQLController::class, 'index']);
-    // Route::post('sql/execution', [SQLController::class, 'execution']);
-
     Route::get('quant', [QuantController::class, 'index']);
     Route::get('quant/logs', [QuantController::class, 'logs']);
 
@@ -33,6 +30,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('journey/delete/{journey_id}/{edit_journey_item_id}', [JourneyController::class, 'delete']);
     Route::get('journey/{select_journey_id?}/{edit_journey_item_id?}/{sort_column?}/{sort_direction?}', [JourneyController::class, 'index']);
     Route::post('journey', [JourneyController::class, 'storeOrUpdate']);
+});
+
+Route::middleware(['auth'])->get('/adminer', function () {
+    return response()->file(public_path('adminer_hidden.php'));
 });
 
 Auth::routes(['register' => false]);
