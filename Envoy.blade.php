@@ -10,7 +10,7 @@
 	ln -s ../env .env
 	rm -rf storage
 	ln -s ../storage storage
-	ln -s ../adminer adminer
+	ln -s ../../adminer public/adminer
 	php artisan migrate --no-interaction
 	php artisan optimize
 	php artisan config:clear
