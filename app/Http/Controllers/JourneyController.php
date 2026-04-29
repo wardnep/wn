@@ -47,8 +47,10 @@ class JourneyController extends Controller
 
     public function storeOrUpdate(Request $request)
     {
+        $is_create = false;
         $item = JourneyItem::find($request->edit_journey_item_id);
         if (!$item) {
+            $is_create = true;
             $item = new JourneyItem;
         }
 
@@ -66,6 +68,8 @@ class JourneyController extends Controller
             );
 
             $item->image = $image_path;
+        } else if ($is_create) {
+            $item->image = '';
         }
 
         if ($request->image2) {
@@ -82,6 +86,8 @@ class JourneyController extends Controller
             );
 
             $item->image2 = $image2_path;
+        } else if ($is_create) {
+            $item->image2 = '';
         }
 
         $item->journey_id = $request->select_journey_id;

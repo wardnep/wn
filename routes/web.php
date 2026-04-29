@@ -32,8 +32,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('journey', [JourneyController::class, 'storeOrUpdate']);
 });
 
-Route::middleware(['auth'])->get('/adminer', function () {
-    return response()->file(public_path('adminer_hidden.php'));
-});
-
 Auth::routes(['register' => false]);

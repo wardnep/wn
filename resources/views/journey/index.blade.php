@@ -65,7 +65,7 @@
                                     <th>Position</th>
                                     <th>Result</th>
                                     <th width="100px">Risk</th>
-                                    <th>R</th>
+                                    {{-- <th>R</th> --}}
                                     <th>Strategy</th>
                                     <th width="100px">Grade</th>
                                     <th>Before</th>
@@ -91,7 +91,7 @@
                                         <td class="{{ $is_edit ? 'edit' : '' }}">{!! $item->dposition !!}</td>
                                         <td class="{{ $is_edit ? 'edit' : '' }}">{!! $item->dresult !!}</td>
                                         <td class="{{ $is_edit ? 'edit' : '' }}" align="right">{!! $item->size !!}</td>
-                                        <td class="{{ $is_edit ? 'edit' : '' }}" align="center">{!! $item->dr !!}</td>
+                                        {{-- <td class="{{ $is_edit ? 'edit' : '' }}" align="center">{!! $item->dr !!}</td> --}}
                                         <td class="{{ $is_edit ? 'edit' : '' }}">{{ $item->strategy }}</td>
                                         <td class="{{ $is_edit ? 'edit' : '' }}"><b>{!! $item->dgrade !!}</b></td>
                                         <td class="{{ $is_edit ? 'edit' : '' }}">
@@ -140,6 +140,7 @@
                                         </td>
                                         <td>
                                             <select class="form-control" name="entry_session">
+                                                <option {{ $edit_journey_item && $edit_journey_item->exit_session == 'Asia' ? 'selected' : '' }}>Asia</option>
                                                 <option {{ $edit_journey_item && $edit_journey_item->entry_session == 'London' ? 'selected' : '' }}>London</option>
                                                 <option {{ $edit_journey_item && $edit_journey_item->entry_session == 'London + NY' ? 'selected' : '' }}>London + NY</option>
                                                 <option {{ $edit_journey_item && $edit_journey_item->entry_session == 'NY' ? 'selected' : '' }}>NY</option>
@@ -169,12 +170,12 @@
                                         <td>
                                             <input class="form-control" name="size" value="{{ $edit_journey_item ? $edit_journey_item->size : $default_size }}" />
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <select class="form-control" name="result_r1">
                                                 <option value="2" {{ $edit_journey_item && $edit_journey_item->result_r1 == '2' ? 'selected' : "" }}>2</option>
                                                 <option value="-1" {{ $edit_journey_item && $edit_journey_item->result_r1 == '-1' ? 'selected' : "" }}>-1</option>
                                             </select>
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             <select class="form-control" name="strategy">
                                                 <option value="Reversal" {{ $edit_journey_item && $edit_journey_item->grade == "Reversal" ? "selected" : "" }}>Reversal</option>
