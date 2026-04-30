@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>wn.in.th</title>
+    <title>wardnep</title>
 <body>
     <div align="center">
         <a href="{{ url('journey') }}">Trading Journey</a><br />
