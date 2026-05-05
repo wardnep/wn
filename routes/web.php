@@ -7,11 +7,17 @@ use App\Http\Controllers\JourneyController;
 use App\Http\Controllers\SQLController;
 use App\Http\Controllers\QuantController;
 
+use App\Http\Livewire\AppointmentsCalendar;
+use App\Http\Livewire\JourneyCalendarController;
+
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('quant', [QuantController::class, 'index']);
     Route::get('quant/logs', [QuantController::class, 'logs']);
+
+    Route::get('journey/appointment', [AppointmentsCalendar::class, 'calendar']);
+    Route::get('journey/calendar', [JourneyCalendarController::class, 'calendar']);
 
     Route::get('journey/test', [JourneyController::class, 'test']);
     Route::get('journey/summary_tp', [JourneyController::class, 'summary_tp']);
