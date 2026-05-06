@@ -168,7 +168,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input class="form-control" name="size" value="{{ $edit_journey_item ? $edit_journey_item->size : $default_size }}" />
+                                            <input class="form-control" name="size" value="{{ $edit_journey_item ? $edit_journey_item->size : '1%' }}" />
                                         </td>
                                         {{-- <td>
                                             <select class="form-control" name="result_r1">

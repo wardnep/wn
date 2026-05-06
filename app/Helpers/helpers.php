@@ -55,3 +55,43 @@ function date2DateThai($date = '')
 
     return $day . ' ' . $months[(int)$month - 1] . ' ' . $year;
 }
+
+function mysqlDateFormat($date)
+{
+    //
+    //
+    //
+    // ignore time trilling
+    $date = explode(' ', $date);
+
+    if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date[0])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function datePickerFormat($date)
+{
+    //
+    //
+    //
+    // ignore time trilling
+    $date = explode(' ', $date);
+
+    if (preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{4}$/", $date[0])) {
+        //
+        //
+        //
+        // day, month leading 0
+        return true;
+    } else if (preg_match("/^([1-9]|[1-2][0-9]|3[0-1])\/([1-9]|1[0-2])\/[0-9]{4}$/", $date[0])) {
+        //
+        //
+        //
+        // day, month not leading 0
+        return true;
+    }
+
+    return false;
+}
