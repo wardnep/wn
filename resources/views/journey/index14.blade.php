@@ -128,14 +128,12 @@
                                         <td width="100px">
                                             <select class="form-control" name="result_r1">
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'WIN' ? 'selected' : '' }}>WIN</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'CLOSE' ? 'selected' : '' }}>CLOSE</option>
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
                                             </select>
                                         </td>
                                         <td width="100px">
                                             <select class="form-control" name="result_r2">
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r2 == 'WIN' ? 'selected' : '' }}>WIN</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->result_r2 == 'CLOSE' ? 'selected' : '' }}>CLOSE</option>
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r2 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
                                             </select>
                                         </td>
