@@ -51,8 +51,8 @@
                                     <th width="150px">Date</th>
                                     <th>Entry</th>
                                     <th>Position</th>
-                                    <th>TP1</th>
-                                    <th>TP2</th>
+                                    <th>Result</th>
+                                    {{-- <th>TP2</th> --}}
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -73,7 +73,7 @@
                                         <td>{!! $item->d_entry_session !!}</td>
                                         <td>{!! $item->dposition !!}</td>
                                         <td>{!! $item->dresult_r1 !!}</td>
-                                        <td>{!! $item->dresult_r2 !!}</td>
+                                        {{-- <td>{!! $item->dresult_r2 !!}</td> --}}
                                         <td>
                                             @if ($item->image)
                                                 <a href="{{ url('journey/image/'.$select_journey->id.'/'.$item->id) }}" target="_blank">
@@ -131,12 +131,12 @@
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
                                             </select>
                                         </td>
-                                        <td width="100px">
+                                        {{-- <td width="100px">
                                             <select class="form-control" name="result_r2">
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r2 == 'WIN' ? 'selected' : '' }}>WIN</option>
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r2 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
                                             </select>
-                                        </td>
+                                        </td> --}}
                                         <td colspan="2">
                                             <input class="form-control" type="file" name="image" />
                                         </td>
