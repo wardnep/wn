@@ -42,6 +42,10 @@ class JourneyController extends Controller
             $default_size = '';
         }
 
+        if ($select_journey_id == 14) {
+            return view('journey.index14', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
+        }
+
         return view('journey.index', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
     }
 
@@ -100,7 +104,7 @@ class JourneyController extends Controller
         $item->tp1 = $request->tp1 ?: 0;
         $item->tp2 = $request->tp2 ?: 0;
         $item->result_r1 = $request->result_r1 ?: 0;
-        $item->result_r2 = '';
+        $item->result_r2 = $request->result_r2 ?: 0;
         $item->grade = $request->grade ?: '';
         $item->strategy = $request->strategy ?: '';
         $item->note = $request->note ?: '';

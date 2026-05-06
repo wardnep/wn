@@ -74,6 +74,38 @@ class JourneyItem extends Model
         return "<font color=\"$color\">$this->result</font>";
     }
 
+    public function getDresultR1Attribute()
+    {
+        $color = '';
+        if ($this->result_r1 == 'WIN') {
+            $color = '#2E5E3A';
+        } else if ($this->result_r1 == 'LOSS') {
+            $color = '#FF0000';
+        } else if ($this->result_r1 == 'BE') {
+            $color = '#0000FF';
+        } else if ($this->result_r1 == 'CLOSE') {
+            $color = '#0000FF';
+        }
+
+        return "<font color=\"$color\">$this->result_r1</font>";
+    }
+
+    public function getDresultR2Attribute()
+    {
+        $color = '';
+        if ($this->result_r2 == 'WIN') {
+            $color = '#2E5E3A';
+        } else if ($this->result_r2 == 'LOSS') {
+            $color = '#FF0000';
+        } else if ($this->result_r2 == 'BE') {
+            $color = '#0000FF';
+        } else if ($this->result_r2 == 'CLOSE') {
+            $color = '#0000FF';
+        }
+
+        return "<font color=\"$color\">$this->result_r2</font>";
+    }
+
     public function getDsl1Attribute()
     {
         if ($this->result == 'LOSS') {
