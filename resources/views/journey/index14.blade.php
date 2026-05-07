@@ -18,7 +18,7 @@
                                 @endforeach
                             </select>
                         </form>
-                        {{-- @include('journey.summary.snr14') --}}
+                        @include('journey.summary.snr14')
                     </div>
                     <div class="col-md-3">
                         <form id="note_from" method="POST" action="{{ url('journey/note') }}">

@@ -7,6 +7,7 @@ use App\Http\Controllers\JourneyController;
 use App\Http\Controllers\SQLController;
 use App\Http\Controllers\QuantController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\TestController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -37,3 +38,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Auth::routes(['register' => false]);
+
+Route::get('test', [TestController::class, 'index']);

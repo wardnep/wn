@@ -104,36 +104,3 @@ use App\Models\JourneyItem;
         <a href="{{ url('journey/download/'.$select_journey->id) }}"><span class="fa fa-file-excel-o" /> Export</a>
     </div>
 </div>
-<hr />
-<div class="row">
-    <div class="col-md-2">
-        Total <b>{{ $total }}</b>
-    </div>
-    <div class="col-md-2">
-        Win Rate <b>{{ number_format($win_rate, 2) }}%</b>
-    </div>
-    <div class="col-md-2">
-        Losing Streak <b>{{ $losing_streak }}</b>
-    </div>
-    <div class="col-md-3">
-        Win <b>{{ $win }}</b> Loss <b>{{ $loss }}</b>
-    </div>
-    <div class="col-md-2">
-        Orders/Day <b>{{ $obd }}</b>
-    </div>
-    <div class="col-md-2">
-        Expectancy <b>{{ number_format($exp, 2) }}</b>
-    </div>
-    <div class="col-md-2">
-        DD <b>{{ $dd }}R</b>
-    </div>
-    <div class="col-md-2">
-        Profit Factor <b>{{ number_format($pf, 2) }}</b>
-    </div>
-    <div class="col-md-3">
-        Recovery Factor <b>{{ number_format($rf, 2) }}</b>
-    </div>
-    <div class="col-md-2">
-        <a href="{{ url('journey/download/'.$select_journey->id) }}"><span class="fa fa-file-excel-o" /> Export</a>
-    </div>
-</div>

@@ -17,11 +17,6 @@ class CalendarController extends Controller
             [
                 'title' => 'Meeting',
                 'start' => '2026-05-10',
-            ],
-            [
-                'title' => 'Holiday',
-                'start' => '2026-05-15',
-                'end' => '2026-05-17',
             ]
         ]);
     }
