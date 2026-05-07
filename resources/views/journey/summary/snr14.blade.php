@@ -3,66 +3,61 @@ use App\Models\JourneyItem;
 @endphp
 @php
     $items = JourneyItem::where('journey_id', $select_journey->id)
-        // ->where('entry_session', '<>', 'London')
         ->orderBy('id')
         ->get();
 
     $total = $items->count();
+    $win = $items->where('result_r1', 'WIN')->count();
+    $loss = $items->where('result_r1', 'LOSS')->count();
 
-    $win = $items->where('result_r1', '>', 0)->count();
-    $loss = $items->where('result_r1', '<', 0)->count();
-    $be = $items->where('result_r1', 0)->count();
-
-    $win_rate = $total ? ($win / $total) * 100 : 0;
-    $loss_rate = 100 - $win_rate;
+    $win_rate = $total ? $win / $total : 0;
+    $loss_rate = 1 - $win_rate;
 
     // Expectancy
-    $exp = $total ? $items->sum('result_r1') / $total : 0;
+    $exp = ($win_rate * 1.5) - ($loss_rate * 1);
 
     // Drawdown
     $equity = 0;
     $peak = 0;
     $dd = 0;
-
     foreach ($items as $item) {
-        $equity += $item->result_r1;
+        $r = $item->result_r1 === 'WIN' ? 1.5 : -1;
+        $equity += $r;
         $peak = max($peak, $equity);
         $dd = max($dd, $peak - $equity);
     }
 
-    // PF
-    $gross_profit = $items->where('result_r1', '>', 0)->sum('result_r1');
-    $gross_loss = abs($items->where('result_r1', '<', 0)->sum('result_r1'));
+    // RF
+    $gross_profit = 0;
+    $gross_loss = 0;
+    foreach ($items as $item) {
+        if ($item->result_r1 === 'WIN') {
+            $gross_profit += 1.5;
+        } else {
+            $gross_loss += 1;
+        }
+    }
     $pf = $gross_loss > 0 ? $gross_profit / $gross_loss : 0;
 
-    // RF
-    $net_profit = $items->sum('result_r1');
-    $rf = $dd > 0 ? $net_profit / $dd : 0;
-
     // Streak
-    $winning_streak = 0;
-    $losing_streak = 0;
-    $win_count = 0;
-    $loss_count = 0;
+    $max_losing_streak = 0;
+    $current_losing_dtreak = 0;
     foreach ($items as $item) {
-
-        if ($item->result_r1 > 0) {
-            $win_count++;
-            $loss_count = 0;
-
-        } elseif ($item->result_r1 < 0) {
-            $loss_count++;
-            $win_count = 0;
-
+        if ($item->result_r1 === 'LOSS') {
+            $current_losing_dtreak++;
+            $max_losing_streak = max(
+                $max_losing_streak,
+                $current_losing_dtreak
+            );
         } else {
-            // BE → reset (สำคัญ)
-            // $win_count = 0;
-            // $loss_count = 0;
+            // เจอ win รีเซ็ต
+            $current_losing_dtreak = 0;
         }
-
-        $winning_streak = max($winning_streak, $win_count);
-        $losing_streak = max($losing_streak, $loss_count);
     }
+
+    // Recovery Factor
+    $net_profit = $equity;
+    $rf = $dd > 0 ? $net_profit / $dd : 0;
 
     // Order / Day
     $start_date = $items->first() ? date2MySqlDate2($items->first()->date) : '';
@@ -80,7 +75,7 @@ use App\Models\JourneyItem;
         Win Rate <b>{{ number_format($win_rate, 2) }}%</b>
     </div>
     <div class="col-md-2">
-        Losing Streak <b>{{ $losing_streak }}</b>
+        Losing Streak <b>{{ $max_losing_streak }}</b>
     </div>
     <div class="col-md-3">
         Win <b>{{ $win }}</b> Loss <b>{{ $loss }}</b>
