@@ -60,12 +60,8 @@ use App\Models\JourneyItem;
     $rf = $dd > 0 ? $net_profit / $dd : 0;
 
     // Order / Day
-    $start_date = $items->first() ? date2MySqlDate2($items->first()->date) : '';
-    $last_date = $items->first() ? date2MySqlDate2($items->sortByDesc('id')->first()->date) : '';
-    $start = Carbon::parse($start_date);
-    $end = Carbon::parse($last_date);
-    $weekdays = $start->diffInWeekdays($end);
-    $obd = $weekdays ? number_format($total / $weekdays, 2) : 0;
+    $date_count = JourneyItem::where('journey_id', $select_journey->id)->distinct('date')->count();
+    $obd = $date_count / $total;
 @endphp
 <div class="row">
     <div class="col-md-2">
