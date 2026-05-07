@@ -34,7 +34,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
                         @php
                             if ($sort_direction == 'ASC') {
                                 $sort_direction = 'DESC';
@@ -49,10 +50,8 @@
                             <thead>
                                 <tr>
                                     <th width="150px">Date</th>
-                                    <th>Entry</th>
                                     <th>Position</th>
                                     <th>Result</th>
-                                    {{-- <th>TP2</th> --}}
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -70,7 +69,6 @@
                                     @endif
                                     <tr>
                                         <td>{{ $item->date }}</td>
-                                        <td>{!! $item->d_entry_session !!}</td>
                                         <td>{!! $item->dposition !!}</td>
                                         <td>{!! $item->dresult_r1 !!}</td>
                                         {{-- <td>{!! $item->dresult_r2 !!}</td> --}}
@@ -81,7 +79,7 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td width="10%">
+                                        <td width="20%">
                                             @if (!$is_edit)
                                                 <a href="{{ url('journey/' . $select_journey->id . "/" . $item->id . '?page=' . $journey_items->currentPage()) }}" class="btn btn-success">
                                                     <span class="fas fa-edit" />
@@ -111,14 +109,6 @@
                                         <td>
                                             <input type="text" name="date" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->date : $default_date }}" />
                                         </td>
-                                        <td>
-                                            <select class="form-control" name="entry_session">
-                                                <option {{ $edit_journey_item && $edit_journey_item->exit_session == 'Asia' ? 'selected' : '' }}>Asia</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->entry_session == 'London' ? 'selected' : '' }}>London</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->entry_session == 'London + NY' ? 'selected' : '' }}>London + NY</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->entry_session == 'NY' ? 'selected' : '' }}>NY</option>
-                                            </select>
-                                        </td>
                                         <td width="100px">
                                             <select class="form-control" name="position">
                                                 <option {{ $edit_journey_item && $edit_journey_item->position == 'BUY' ? 'selected' : '' }}>BUY</option>
@@ -131,14 +121,8 @@
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
                                             </select>
                                         </td>
-                                        {{-- <td width="100px">
-                                            <select class="form-control" name="result_r2">
-                                                <option {{ $edit_journey_item && $edit_journey_item->result_r2 == 'WIN' ? 'selected' : '' }}>WIN</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->result_r2 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
-                                            </select>
-                                        </td> --}}
-                                        <td colspan="2">
-                                            <input class="form-control" type="file" name="image" />
+                                        <td>
+                                            <input type="file" name="image" />
                                         </td>
                                         <td>
                                             <button type="submit" class="btn btn-primary">
@@ -151,17 +135,11 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="10">
-                                            <input type="text" name="note" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->note : "" }}" />
-                                        </td>
-                                        <td></td>
-                                    </tr>
                                 </form>
                             </tbody>
                         </table>
                     </div>
+                    <div class="col-md-2"></div>
                 </div>
             </div>
         </div>
