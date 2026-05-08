@@ -68,7 +68,7 @@ use App\Models\JourneyItem;
         Total <b>{{ $total }}</b>
     </div>
     <div class="col-md-2">
-        Win Rate <b>{{ number_format($win_rate, 2) }}%</b>
+        Win Rate <b>{{ number_format($win_rate * 100, 2) }}%</b>
     </div>
     <div class="col-md-2">
         Losing Streak <b>{{ $max_losing_streak }}</b>
