@@ -46,6 +46,7 @@
                             $select_journey_id = $select_journey ? $select_journey->id : 0;
                             $edit_journey_item_id = $edit_journey_item ? $edit_journey_item->id : 0;
                         @endphp
+                         {{ $journey_items->currentPage() }} / {{ $journey_items->lastPage() }}
                         <table class="table table-bordered table-striped">
                             <tbody>
                                 <tr>
