@@ -39,4 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
 Auth::routes(['register' => false]);
 
+Route::get('sizing', function () {
+    return view('sizing');
+});
 Route::get('test', [TestController::class, 'index']);
