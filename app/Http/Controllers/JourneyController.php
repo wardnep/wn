@@ -14,7 +14,7 @@ use App\Models\JourneyItem;
 
 class JourneyController extends Controller
 {
-    public function index(Request $request, $select_journey_id = 12, $edit_journey_item_id = 0, $sort_column = 'id', $sort_direction = 'ASC')
+    public function index(Request $request, $select_journey_id = 14, $edit_journey_item_id = 0, $sort_column = 'id', $sort_direction = 'ASC')
     {
         $exclude_asia = 'Y';
         $exclude_london = 'Y';
