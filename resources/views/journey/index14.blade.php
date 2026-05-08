@@ -47,6 +47,17 @@
                             $edit_journey_item_id = $edit_journey_item ? $edit_journey_item->id : 0;
                         @endphp
                         <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td colspan="12" align="right">
+                                        <div align="right">
+                                            {{ $journey_items->appends([
+                                                'select_journey_id' => $select_journey ? $select_journey->id : 0
+                                            ])->links() }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
                             <thead>
                                 <tr>
                                     <th width="150px">Date</th>
