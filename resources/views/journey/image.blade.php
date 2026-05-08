@@ -12,12 +12,18 @@
                     <a style="color:white" href="{{ url('journey/image/'.$prev_item->journey_id.'/'.$prev_item->id) }}">prev</a>
                 @endif
             </td>
-            <td align="center" width="48%">
-                <img src="{{ $item->dimage }}" width="100%" />
-            </td>
-            <td align="center" width="48%">
-                <img src="{{ $item->dimage2 }}" width="100%" />
-            </td>
+            @if ($item->image && $item->image2)
+                <td align="center" width="48%">
+                    <img src="{{ $item->dimage }}" width="100%" />
+                </td>
+                <td align="center" width="48%">
+                    <img src="{{ $item->dimage2 }}" width="100%" />
+                </td>
+            @else
+                <td align="center">
+                    <img src="{{ $item->dimage }}" width="100%" />
+                </td>
+            @endif
             <td width="2%">
                 @if ($next_item)
                     <a style="color:white" href="{{ url('journey/image/'.$next_item->journey_id.'/'.$next_item->id) }}">next</a>
