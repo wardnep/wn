@@ -61,7 +61,7 @@ use App\Models\JourneyItem;
 
     // Order / Day
     $date_count = JourneyItem::where('journey_id', $select_journey->id)->distinct('date')->count();
-    $obd = $date_count / $total;
+    $obd = number_format($date_count / $total, 2);
 @endphp
 <div class="row">
     <div class="col-md-2">
