@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Test() {
-    return (
-        <button>
-            Click Me
-        </button>
-    );
-}
+const Test = () => <div>
+    <button>
+        Click Me....
+    </button>
+</div>
+
+export default Test;
