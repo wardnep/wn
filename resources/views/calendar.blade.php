@@ -25,19 +25,20 @@
 
 @section('js')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
 
-            const calendarEl = document.getElementById('calendar');
+            var calendarEl = document.getElementById('calendar');
 
-            const calendar = new FullCalendar.Calendar(calendarEl, {
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
                 initialView: 'dayGridMonth',
 
-                events: '/calendar/events',
+                events: '/calendar/{{ $journey_id }}/events'
 
-                height: 'auto',
             });
 
             calendar.render();
+
         });
     </script>
 @endsection
