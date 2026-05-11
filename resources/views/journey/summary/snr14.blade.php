@@ -20,48 +20,57 @@ use App\Models\JourneyItem;
     $equity = 0;
     $peak = 0;
     $dd = 0;
+    // RF
+    $gross_profit = 0;
+    $gross_loss = 0;
+    // Streak
+    $max_losing_streak = 0;
+    $current_losing_streak = 0;
     foreach ($items as $item) {
+        //
+        //
+        // Drawdown
+        //
         $r = $item->result_r1 === 'WIN' ? 1.5 : -1;
         $equity += $r;
         $peak = max($peak, $equity);
         $dd = max($dd, $peak - $equity);
-    }
-
-    // RF
-    $gross_profit = 0;
-    $gross_loss = 0;
-    foreach ($items as $item) {
+        //
+        //
+        // RF
+        //
         if ($item->result_r1 === 'WIN') {
             $gross_profit += 1.5;
         } else {
             $gross_loss += 1;
         }
-    }
-    $pf = $gross_loss > 0 ? $gross_profit / $gross_loss : 0;
-
-    // Streak
-    $max_losing_streak = 0;
-    $current_losing_dtreak = 0;
-    foreach ($items as $item) {
+        //
+        //
+        // Streak
+        //
         if ($item->result_r1 === 'LOSS') {
-            $current_losing_dtreak++;
+            $current_losing_streak++;
             $max_losing_streak = max(
                 $max_losing_streak,
-                $current_losing_dtreak
+                $current_losing_streak
             );
         } else {
             // เจอ win รีเซ็ต
-            $current_losing_dtreak = 0;
+            $current_losing_streak = 0;
         }
     }
+
+    $pf = $gross_loss > 0 ? $gross_profit / $gross_loss : 0;
 
     // Recovery Factor
     $net_profit = $equity;
     $rf = $dd > 0 ? $net_profit / $dd : 0;
 
     // Order / Day
-    $date_count = JourneyItem::where('journey_id', $select_journey->id)->distinct('date')->count();
-    $obd = number_format($date_count / $total, 2);
+    $date_count = JourneyItem::where('journey_id', $select_journey->id)
+        ->distinct()
+        ->count('date');
+    $obd = $date_count > 0 ? number_format($total / $date_count, 2) : 0;
 @endphp
 <div class="row">
     <div class="col-md-2">
