@@ -67,9 +67,7 @@ use App\Models\JourneyItem;
     $rf = $dd > 0 ? $net_profit / $dd : 0;
 
     // Order / Day
-    $date_count = JourneyItem::where('journey_id', $select_journey->id)
-        ->distinct()
-        ->count('date');
+    $date_count = $items->pluck('date')->unique()->count();
     $obd = $date_count > 0 ? number_format($total / $date_count, 2) : 0;
 @endphp
 <div class="row">
