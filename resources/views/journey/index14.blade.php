@@ -52,7 +52,8 @@
                                     <th width="150px">Date</th>
                                     <th>Position</th>
                                     <th>Result</th>
-                                    <th></th>
+                                    <th>Image</th>
+                                    <th>Note</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -71,7 +72,6 @@
                                         <td>{{ $item->date }}</td>
                                         <td>{!! $item->dposition !!}</td>
                                         <td>{!! $item->dresult_r1 !!}</td>
-                                        {{-- <td>{!! $item->dresult_r2 !!}</td> --}}
                                         <td>
                                             @if ($item->image)
                                                 <a href="{{ url('journey/image/'.$select_journey->id.'/'.$item->id) }}" target="_blank">
@@ -79,6 +79,7 @@
                                                 </a>
                                             @endif
                                         </td>
+                                        <td>{{ $item->note }}</td>
                                         <td width="20%">
                                             @if (!$is_edit)
                                                 <a href="{{ url('journey/' . $select_journey->id . "/" . $item->id . '?page=' . $journey_items->currentPage()) }}" class="btn btn-success">
@@ -121,7 +122,7 @@
                                                 <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        <td colspan="2">
                                             <input type="file" name="image" />
                                         </td>
                                         <td>
@@ -134,6 +135,12 @@
                                                 </a>
                                             @endif
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <input class="form-control" size="50" name="note" value="{{ $edit_journey_item ? $edit_journey_item->note : '' }}" />
+                                        </td>
+                                        <td></td>
                                     </tr>
                                 </form>
                             </tbody>
