@@ -53,7 +53,7 @@
                                     <th>Result</th>
                                     <th>Image</th>
                                     <th>Note</th>
-                                    <th></th>
+                                    <th width="200px"></th>
                                 </tr>
                             </thead>
                             <tbody>
