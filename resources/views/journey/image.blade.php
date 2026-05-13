@@ -1,4 +1,12 @@
 <html>
+<head>
+    <style>
+        img {
+            width: 70vw;
+            height: auto;
+        }
+    </style>
+</head>
 <body bgcolor="#333333">
     <table align="center">
         <tr>
