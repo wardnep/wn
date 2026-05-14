@@ -42,11 +42,13 @@ class JourneyController extends Controller
             $default_size = '';
         }
 
+        $total = JourneyItem::count();
+
         if ($select_journey_id == 14 || $select_journey_id == 15) {
-            return view('journey.index14', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
+            return view('journey.index14', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total'));
         }
 
-        return view('journey.index', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
+        return view('journey.index', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total'));
     }
 
     public function storeOrUpdate(Request $request)

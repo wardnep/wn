@@ -1,7 +1,7 @@
 @extends('_layouts.app')
 
 @section('title')
-    Trading Journey
+    Trading Journey - {{ $total }}
 @endsection
 
 @section('content')
