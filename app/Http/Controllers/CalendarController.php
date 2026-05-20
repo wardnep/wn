@@ -38,6 +38,8 @@ class CalendarController extends Controller
             $loss = JourneyItem::where('date', $item->date)->where('result_r1', 'LOSS')->count();
             $r = ($win * 1.5) - ($loss * 1);
 
+            $total_trade = $win + $loss;
+
             if ($r) {
                 $date = Carbon::createFromFormat('d M Y', $item->date)
                     ->format('Y-m-d');
@@ -53,7 +55,7 @@ class CalendarController extends Controller
                 }
 
                 $datas[] = [
-                    'title' => $r.'R',
+                    'title' => "($total_trade) {$r}R",
                     'start' => $date,
                     'classNames' => $class
                 ];
