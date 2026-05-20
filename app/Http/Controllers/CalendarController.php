@@ -19,7 +19,7 @@ class CalendarController extends Controller
         foreach ($items as $item) {
             $win = JourneyItem::where('date', $item->date)->where('result_r1', 'WIN')->count();
             $loss = JourneyItem::where('date', $item->date)->where('result_r1', 'LOSS')->count();
-            $r = $win - $loss;
+            $r = ($win * 1.5) - ($loss * 1);
 
             $total += $r;
         }
@@ -36,7 +36,7 @@ class CalendarController extends Controller
         foreach ($items as $item) {
             $win = JourneyItem::where('date', $item->date)->where('result_r1', 'WIN')->count();
             $loss = JourneyItem::where('date', $item->date)->where('result_r1', 'LOSS')->count();
-            $r = $win - $loss;
+            $r = ($win * 1.5) - ($loss * 1);
 
             if ($r) {
                 $date = Carbon::createFromFormat('d M Y', $item->date)
