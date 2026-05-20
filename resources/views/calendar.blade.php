@@ -10,13 +10,16 @@
             background-color: #28a745 !important;
             border-color: #28a745 !important;
         }
-
         .lose-trade {
             background-color: #dc3545 !important;
             border-color: #dc3545 !important;
         }
         .win-big {
             background-color: #0d6e0d !important;
+        }
+        .lose-big {
+            background-color: #8b0000 !important;
+            border-color: #8b0000 !important;
         }
     </style>
 @endsection

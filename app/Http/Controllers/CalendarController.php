@@ -46,7 +46,9 @@ class CalendarController extends Controller
                     $class = 'win-big';
                 } elseif ($r > 0) {
                     $class = 'win-trade';
-                } elseif ($r < 0) {
+                } elseif ($r < -1) {
+                    $class = 'lose-big';
+                } else {
                     $class = 'lose-trade';
                 }
 
