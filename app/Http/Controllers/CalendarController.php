@@ -55,7 +55,7 @@ class CalendarController extends Controller
                 }
 
                 $datas[] = [
-                    'title' => "($total_trade) {$r}R",
+                    'title' => "{$r}R ($total_trade)",
                     'start' => $date,
                     'classNames' => $class
                 ];
