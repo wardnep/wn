@@ -15,6 +15,9 @@
             background-color: #dc3545 !important;
             border-color: #dc3545 !important;
         }
+        .win-big {
+            background-color: #0d6e0d !important;
+        }
     </style>
 @endsection
 

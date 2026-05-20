@@ -41,12 +41,19 @@ class CalendarController extends Controller
             if ($r) {
                 $date = Carbon::createFromFormat('d M Y', $item->date)
                     ->format('Y-m-d');
+
+                if ($r > 1) {
+                    $class = 'win-big';
+                } elseif ($r > 0) {
+                    $class = 'win-trade';
+                } elseif ($r < 0) {
+                    $class = 'lose-trade';
+                }
+
                 $datas[] = [
                     'title' => $r.'R',
                     'start' => $date,
-                    'classNames' => [
-                        $r > 0 ? 'win-trade' : 'lose-trade'
-                    ]
+                    'classNames' => $class
                 ];
 
                 $total += $r;
