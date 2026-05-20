@@ -13,26 +13,6 @@ class CalendarController extends Controller
 {
     public function index($journey_id)
     {
-        $items = JourneyItem::where('journey_id', $journey_id)
-            ->select(
-                'date',
-                DB::raw('COUNT(*) as orders')
-            )
-            ->groupBy('date')
-            ->get();
-
-        $datas = [];
-        foreach ($items as $item) {
-
-            $date = Carbon::createFromFormat('d M Y', $item->date)
-                ->format('Y-m-d');
-
-            $datas[] = [
-                'title' => 'Meeting Journey '.$journey_id.' ('.$item->orders.')',
-                'start' => $date,
-            ];
-        }
-
         return view('calendar', compact('journey_id'));
     }
 
@@ -52,6 +32,9 @@ class CalendarController extends Controller
                 $datas[] = [
                     'title' => $r.'R',
                     'start' => $date,
+                    'classNames' => [
+                        $r > 0 ? 'win-trade' : 'lose-trade'
+                    ]
                 ];
             }
         }
