@@ -14,7 +14,7 @@ use App\Models\JourneyItem;
     $loss_rate = 1 - $win_rate;
 
     // Expectancy
-    $exp = ($win_rate * 1.5) - ($loss_rate * 1);
+    $expectancy = ($win_rate * 1.5) - ($loss_rate * 1);
 
     // Drawdown
     $equity = 0;
@@ -87,7 +87,7 @@ use App\Models\JourneyItem;
         Orders/Day <b>{{ $obd }}</b>
     </div>
     <div class="col-md-2">
-        Expectancy <b>{{ number_format($exp, 2) }}</b>
+        Expectancy <b>{{ number_format($expectancy, 2) }}</b>
     </div>
     <div class="col-md-2">
         DD <b>{{ $dd }}R</b>
@@ -99,6 +99,9 @@ use App\Models\JourneyItem;
         Recovery Factor <b>{{ number_format($rf, 2) }}</b>
     </div>
     <div class="col-md-2">
-        <a href="{{ url('journey/download/'.$select_journey->id) }}"><span class="fa fa-file-excel-o" /> Export</a>
+        Total R <b>{{ $total * $expectancy }}</b>
     </div>
+    <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
+        <span class="fas fa-calendar" />
+    </a>
 </div>
