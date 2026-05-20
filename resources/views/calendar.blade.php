@@ -1,7 +1,7 @@
 @extends('_layouts.app')
 
 @section('title')
-    Calendar
+    Total {{ $total}}R
 @endsection
 
 @section('css')

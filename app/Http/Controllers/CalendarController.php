@@ -13,13 +13,25 @@ class CalendarController extends Controller
 {
     public function index($journey_id)
     {
-        return view('calendar', compact('journey_id'));
+        $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
+
+        $total = 0;
+        foreach ($items as $item) {
+            $win = JourneyItem::where('date', $item->date)->where('result_r1', 'WIN')->count();
+            $loss = JourneyItem::where('date', $item->date)->where('result_r1', 'LOSS')->count();
+            $r = $win - $loss;
+
+            $total += $r;
+        }
+
+        return view('calendar', compact('journey_id', 'total'));
     }
 
     public function events($journey_id)
     {
         $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
 
+        $total = 0;
         $datas = [];
         foreach ($items as $item) {
             $win = JourneyItem::where('date', $item->date)->where('result_r1', 'WIN')->count();
@@ -36,6 +48,8 @@ class CalendarController extends Controller
                         $r > 0 ? 'win-trade' : 'lose-trade'
                     ]
                 ];
+
+                $total += $r;
             }
         }
 
