@@ -1,7 +1,7 @@
 @extends('_layouts.app')
 
 @section('title')
-    Total {{ $total}}R
+    Total - {{ $total}}R
 @endsection
 
 @section('css')
