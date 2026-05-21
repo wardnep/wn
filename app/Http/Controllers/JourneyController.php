@@ -33,6 +33,7 @@ class JourneyController extends Controller
         $query = JourneyItem::where('journey_id', $select_journey_id);
 
         $journey_items = $query->simplePaginate(20);
+        $lastPage = ceil($query->count()/20);
 
         if ($select_journey->items() && $select_journey->items()->latest()->first()) {
             $default_date = $select_journey->items()->latest()->first()->date;
@@ -45,7 +46,7 @@ class JourneyController extends Controller
         $total = JourneyItem::count();
 
         if ($select_journey_id == 14 || $select_journey_id == 15) {
-            return view('journey.index14', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total'));
+            return view('journey.index14', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total', 'lastPage'));
         }
 
         return view('journey.index', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total'));
