@@ -14,7 +14,7 @@ use App\Models\JourneyItem;
 
 class JourneyController extends Controller
 {
-    public function index(Request $request, $select_journey_id = 14, $edit_journey_item_id = 0, $sort_column = 'id', $sort_direction = 'ASC')
+    public function index(Request $request, $select_journey_id = 15, $edit_journey_item_id = 0, $sort_column = 'id', $sort_direction = 'ASC')
     {
         $exclude_asia = 'Y';
         $exclude_london = 'Y';
@@ -33,7 +33,7 @@ class JourneyController extends Controller
         $query = JourneyItem::where('journey_id', $select_journey_id);
 
         $journey_items = $query->simplePaginate(20);
-        $last_page = ceil($query->count()/20);
+        $last_page = ceil($query->count() / 20);
 
         if ($select_journey->items() && $select_journey->items()->latest()->first()) {
             $default_date = $select_journey->items()->latest()->first()->date;
