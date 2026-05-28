@@ -35,8 +35,14 @@ class JourneyController extends Controller
             $query->where('entry_session', '<>', 'Asia');
         }
 
-        $journey_items = $query->simplePaginate(20);
-        $last_page = ceil($query->count() / 20);
+
+        $item_per_page = 20;
+        if ($select_journey_id == 15) {
+            $item_per_page = 100;
+        }
+
+        $journey_items = $query->simplePaginate($item_per_page);
+        $last_page = ceil($query->count() / $item_per_page);
 
         if ($select_journey->items() && $select_journey->items()->latest()->first() && $select_journey_id !== 14 && $select_journey_id !== 15) {
             $default_date = $select_journey->items()->latest()->first()->date;
