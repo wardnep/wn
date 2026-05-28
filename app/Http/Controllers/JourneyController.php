@@ -38,12 +38,17 @@ class JourneyController extends Controller
         $journey_items = $query->simplePaginate(20);
         $last_page = ceil($query->count() / 20);
 
-        if ($select_journey->items() && $select_journey->items()->latest()->first() && $select_journey_id !== 15) {
+        if ($select_journey->items() && $select_journey->items()->latest()->first() && $select_journey_id !== 14 && $select_journey_id !== 15) {
             $default_date = $select_journey->items()->latest()->first()->date;
             $default_size = $select_journey->items()->latest()->first()->size;
         } else {
-            $default_date = date2DateThai(Carbon::now()->format('d/m/Y'));
-            $default_size = '';
+            if ($select_journey_id !== 15 || $select_journey_id !== 14) {
+                $default_date = date2DateThai(Carbon::now()->format('d/m/Y'));
+                $default_size = '';
+            } else {
+                $default_date = Carbon::now()->format('d M Y');
+                $default_size = '';
+            }
         }
 
         $total = JourneyItem::count();
