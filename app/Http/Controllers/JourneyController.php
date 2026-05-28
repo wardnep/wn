@@ -38,7 +38,7 @@ class JourneyController extends Controller
         $journey_items = $query->simplePaginate(20);
         $last_page = ceil($query->count() / 20);
 
-        if ($select_journey->items() && $select_journey->items()->latest()->first()) {
+        if ($select_journey->items() && $select_journey->items()->latest()->first() && $select_journey_id !== 15) {
             $default_date = $select_journey->items()->latest()->first()->date;
             $default_size = $select_journey->items()->latest()->first()->size;
         } else {
