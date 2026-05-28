@@ -30,7 +30,10 @@ class JourneyController extends Controller
         $select_journey = Journey::find($select_journey_id);
         $edit_journey_item = JourneyItem::find($request->edit_journey_item_id);
 
-        $query = JourneyItem::where('journey_id', $select_journey_id);
+        $query = JourneyItem::where('journey_id', $select_journey_id)->orderByDesc('id');
+         if ($exclude_asia == 'Y') {
+            $query->where('entry_session', '<>', 'Asia');
+        }
 
         $journey_items = $query->simplePaginate(20);
         $last_page = ceil($query->count() / 20);

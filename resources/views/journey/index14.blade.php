@@ -46,7 +46,7 @@
                             $edit_journey_item_id = $edit_journey_item ? $edit_journey_item->id : 0;
                         @endphp
                         <table class="table table-bordered table-striped">
-                            <thead>
+                            {{-- <thead>
                                 <tr>
                                     <th width="150px">Date</th>
                                     <th>Position</th>
@@ -55,8 +55,58 @@
                                     <th>Note</th>
                                     <th width="200px"></th>
                                 </tr>
-                            </thead>
+                            </thead> --}}
                             <tbody>
+                                <form method="POST" action="{{ url('journey') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="select_journey_id" value="{{ $select_journey ? $select_journey->id : 0 }}" />
+                                    <input type="hidden" name="edit_journey_item_id" value="{{ $edit_journey_item ? $edit_journey_item->id : 0  }}" />
+                                    <input type="hidden" name="page" value="{{ $journey_items->currentPage() }}" />
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="date" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->date : $default_date }}" />
+                                        </td>
+                                        <td width="100px">
+                                            <select class="form-control" name="position">
+                                                <option {{ $edit_journey_item && $edit_journey_item->position == 'BUY' ? 'selected' : '' }}>BUY</option>
+                                                <option {{ $edit_journey_item && $edit_journey_item->position == 'SELL' ? 'selected' : '' }}>SELL</option>
+                                            </select>
+                                        </td>
+                                        <td width="100px">
+                                            <select class="form-control" name="result_r1">
+                                                <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'WIN' ? 'selected' : '' }}>WIN</option>
+                                                <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
+                                            </select>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="file" name="image" />
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-primary">
+                                                <span class="fas fa-save" />
+                                            </button>
+                                            @if ($edit_journey_item)
+                                                <a href="{{ url('journey/' . $select_journey->id . '?page=' . $journey_items->currentPage()) }}" class="btn btn-danger">
+                                                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                                                </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <input class="form-control" size="50" name="note" value="{{ $edit_journey_item ? $edit_journey_item->note : '' }}" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </form>
+                                <tr>
+                                    <td width="150px"><b>Date</b></td>
+                                    <td><b>Position</b></td>
+                                    <td><b>Result</b></td>
+                                    <td><b>Image</b></td>
+                                    <td><b>Note</b></td>
+                                    <td width="200px"></td>
+                                </tr>
                                 @foreach ($journey_items as $item)
                                     @if ($edit_journey_item && $edit_journey_item->id == $item->id)
                                     @php
@@ -106,48 +156,6 @@
                                         @endif
                                     </td>
                                 </tr>
-                                <form method="POST" action="{{ url('journey') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="select_journey_id" value="{{ $select_journey ? $select_journey->id : 0 }}" />
-                                    <input type="hidden" name="edit_journey_item_id" value="{{ $edit_journey_item ? $edit_journey_item->id : 0  }}" />
-                                    <input type="hidden" name="page" value="{{ $journey_items->currentPage() }}" />
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="date" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->date : $default_date }}" />
-                                        </td>
-                                        <td width="100px">
-                                            <select class="form-control" name="position">
-                                                <option {{ $edit_journey_item && $edit_journey_item->position == 'BUY' ? 'selected' : '' }}>BUY</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->position == 'SELL' ? 'selected' : '' }}>SELL</option>
-                                            </select>
-                                        </td>
-                                        <td width="100px">
-                                            <select class="form-control" name="result_r1">
-                                                <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'WIN' ? 'selected' : '' }}>WIN</option>
-                                                <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
-                                            </select>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="file" name="image" />
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary">
-                                                <span class="fas fa-save" />
-                                            </button>
-                                            @if ($edit_journey_item)
-                                                <a href="{{ url('journey/' . $select_journey->id . '?page=' . $journey_items->currentPage()) }}" class="btn btn-danger">
-                                                    <i class="fa fa-window-close" aria-hidden="true"></i>
-                                                </a>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <input class="form-control" size="50" name="note" value="{{ $edit_journey_item ? $edit_journey_item->note : '' }}" />
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </form>
                             </tbody>
                         </table>
                     </div>
