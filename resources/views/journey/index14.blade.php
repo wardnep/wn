@@ -21,16 +21,16 @@
                         @include('journey.summary.snr14')
                     </div>
                     <div class="col-md-3">
-                        <form id="note_from" method="POST" action="{{ url('journey/note') }}">
+                        {{-- <form id="note_from" method="POST" action="{{ url('journey/note') }}">
                             @csrf
                             <input type="hidden" name="journey_id" value="{{ $select_journey->id }}" />
                             <textarea class="form-control" name="note" rows="8">{{ $select_journey->note }}</textarea>
-                        </form>
+                        </form> --}}
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-primary" onClick="javascript: document.getElementById('note_from').submit();">
+                        {{-- <button type="button" class="btn btn-primary" onClick="javascript: document.getElementById('note_from').submit();">
                             <span class="fas fa-save" />
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
                 <div class="row">
