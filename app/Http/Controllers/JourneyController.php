@@ -48,7 +48,7 @@ class JourneyController extends Controller
             $default_date = $select_journey->items()->latest()->first()->date;
             $default_size = $select_journey->items()->latest()->first()->size;
         } else {
-            if ($select_journey_id !== 15 || $select_journey_id !== 14) {
+            if ($select_journey_id !== 15 && $select_journey_id !== 14) {
                 $default_date = date2DateThai(Carbon::now()->format('d/m/Y'));
                 $default_size = '';
             } else {
