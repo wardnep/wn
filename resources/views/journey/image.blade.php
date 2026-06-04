@@ -32,7 +32,7 @@
                     <img src="{{ $item->dimage }}" width="100%" />
                 </td>
                 <td align="center" width="48%">
-                    <img src="{{ $item->dimage2 }}" width="100%" />
+                    <img src="{{ $item->dimage2 }}" width="50%" />
                 </td>
             @else
                 <td align="center">
