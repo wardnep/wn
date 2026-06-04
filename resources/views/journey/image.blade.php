@@ -28,15 +28,15 @@
                 @endif
             </td>
             @if ($item->image && $item->image2)
-                <td align="center" width="48%">
-                    <img src="{{ $item->dimage }}" width="50%" />
+                <td align="center" width="25%">
+                    <img src="{{ $item->dimage }}" />
                 </td>
-                <td align="center" width="48%">
-                    <img src="{{ $item->dimage2 }}" width="50%" />
+                <td align="center" width="25%">
+                    <img src="{{ $item->dimage2 }}" />
                 </td>
             @else
-                <td align="center">
-                    <img src="{{ $item->dimage }}" width="50%" />
+                <td align="center" width="25%">
+                    <img src="{{ $item->dimage }}" />
                 </td>
             @endif
             <td width="2%">
