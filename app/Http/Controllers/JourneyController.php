@@ -230,6 +230,17 @@ class JourneyController extends Controller
         return view('journey.summary.chart5', compact('items'));
     }
 
+    public function chart14($journey_id)
+    {
+        $items = JourneyItem::where('journey_id', $journey_id)->get();
+
+        $win = $items->where('result_r1', 'WIN')->count();
+        $loss = $items->where('result_r1', 'LOSS')->count();
+        $r = ($win * 1.5) - ($loss * 1);
+
+        return view('journey.summary.chart14', compact('items', 'r'));
+    }
+
     public function download($journey_id)
     {
         $query = JourneyItem::where('journey_id', $journey_id);

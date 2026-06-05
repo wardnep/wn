@@ -104,4 +104,7 @@ use App\Models\JourneyItem;
     <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
         <span class="fas fa-calendar" />
     </a>
+    <a href="{{ url('journey/chart14/'.$select_journey->id) }}" class="btn btn-warning" target="_blank">
+        <i class="fas fa-chart-line"></i>
+    </a>
 </div>

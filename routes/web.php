@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('journey/chart3/{journey_id}/{exclude_asia?}', [JourneyController::class, 'chart3']);
     Route::get('journey/chart4/{journey_id}/{exclude_asia?}', [JourneyController::class, 'chart4']);
     Route::get('journey/chart5/{journey_id}', [JourneyController::class, 'chart5']);
+    Route::get('journey/chart14/{journey_id}', [JourneyController::class, 'chart14']);
     Route::get('journey/summary', [JourneyController::class, 'summary']);
     Route::post('journey/note', [JourneyController::class, 'note']);
     Route::get('journey/delete/{journey_id}/{edit_journey_item_id}', [JourneyController::class, 'delete']);
