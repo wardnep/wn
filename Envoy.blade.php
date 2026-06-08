@@ -1,7 +1,6 @@
 @servers(['prod' => ['wardnep@wn']])
 
 @task('deploy', ['on' => 'prod'])
-	whoami
 	cd /var/www/wn
 	release=$(date +%Y%m%d%H%M%S)
 	git clone git@github.com:wardnep/wn.git $release

@@ -21,8 +21,23 @@
         xAxis: {
 			type: 'category',
 			data: [
-				@foreach ($items as $item)
-					'{{ $item->date }}',
+				@php
+					$total = $items->count();
+					$prev_month = "";
+				@endphp
+				@foreach ($items as $key => $item)
+					@php
+						$dates = explode(' ', $item->date);
+						$current_month = $dates[1];
+					@endphp
+					@if ($key == 0 || $key == $total - 1 || $prev_month != $current_month)
+						'{{ $item->date }}',
+					@else
+						'',
+                    @endif
+					@php
+						$prev_month = $current_month;
+					@endphp
                 @endforeach
 			],
 			boundaryGap: false,
