@@ -8,10 +8,15 @@ use App\Http\Controllers\SQLController;
 use App\Http\Controllers\QuantController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\AlertController;
 
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('alert', [AlertController::class, 'index']);
+    Route::post('alert', [AlertController::class, 'storeOrUpdate']);
+    Route::get('alert/delete/{alert_id}', [AlertController::class, 'delete']);
+
     Route::get('quant', [QuantController::class, 'index']);
     Route::get('quant/logs', [QuantController::class, 'logs']);
 
