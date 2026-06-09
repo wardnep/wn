@@ -13,7 +13,7 @@ use App\Http\Controllers\AlertController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('alert', [AlertController::class, 'index']);
+    Route::get('alert/{edit_price_level_id?}', [AlertController::class, 'index']);
     Route::post('alert', [AlertController::class, 'storeOrUpdate']);
     Route::get('alert/delete/{alert_id}', [AlertController::class, 'delete']);
 
