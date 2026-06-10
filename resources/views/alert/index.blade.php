@@ -54,7 +54,7 @@
                                             <input type="radio" name="active" value="1" {{ !$edit_price_level || ($edit_price_level && $edit_price_level->active) ? 'checked' : '' }}> Active<br />
                                             <input type="radio" name="active" value="0" {{ $edit_price_level && !$edit_price_level->active ? 'checked' : '' }}> Inactive
                                         </td>
-                                        <td>
+                                        <td width="200px">
                                             <button type="submit" class="btn btn-primary">
                                                 <span class="fas fa-save" />
                                             </button>
