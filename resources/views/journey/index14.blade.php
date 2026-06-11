@@ -129,7 +129,7 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td>{{ $item->note }}</td>
+                                        <td>{!! $item->note !!}</td>
                                         <td width="20%">
                                             @if (!$is_edit)
                                                 <a href="{{ url('journey/' . $select_journey->id . "/" . $item->id . '?page=' . $journey_items->currentPage()) }}" class="btn btn-success">
