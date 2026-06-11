@@ -10,7 +10,7 @@
         <br /><br />
         <i class="fa fa-book" aria-hidden="true"></i> <a href="{{ url('journey') }}">Trading Journey</a><br />
         <i class="fa fa-cogs" aria-hidden="true"></i> <a href="{{ url('quant') }}">Algorithmic Trading</a><br />
-        <i class="fa fa-bell" aria-hidden="true"></i> <a href="{{ url('alert') }}">Price Alert</a><br /><br />
+        <i class="fa fa-bell" aria-hidden="true"></i> <a href="{{ url('alert') }}">Price Alert</a><br />
         <i class="fa fa-rocket" aria-hidden="true"></i> <a target="_blank" href="https://github.com/wardnep">Github</a>
     </div>
     <!-- Google tag (gtag.js) -->
