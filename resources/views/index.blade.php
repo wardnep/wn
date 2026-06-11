@@ -1,9 +1,9 @@
 <html>
 <head>
     <title>wn</title>
-    <link rel="stylesheet" href="http://localhost:8000/vendor/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="http://localhost:8000/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="http://localhost:8000/vendor/adminlte/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <body>
     <div align="center">
