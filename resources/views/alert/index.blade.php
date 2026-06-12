@@ -9,12 +9,12 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Price</th>
+                                    <th>TimeFrame</th>
                                     <th>Message</th>
                                     <th>Created At</th>
                                     <th>Active</th>
@@ -25,6 +25,7 @@
                                 @foreach ($price_levels as $price_level)
                                     <tr>
                                         <td>{{ $price_level->price }}</td>
+                                        <td>{{ $price_level->time_frame }}</td>
                                         <td>{{ $price_level->message }}</td>
                                         <td>{{ $price_level->created_at->format('j M Y - H:i:s') }}</td>
                                         <td>{{ $price_level->active }}</td>
@@ -47,6 +48,13 @@
                                         <td>
                                             <input type="text" name="price" value="{{ $edit_price_level ? $edit_price_level->price : '' }}" class="form-control">
                                         </td>
+                                        <td>
+                                            <select name="time_frame" class="form-control">
+                                                <option value="15m" {{ $edit_price_level && $edit_price_level->time_frame == '15m' ? 'selected' : '' }}>15m</option>
+                                                <option value="1h" {{ $edit_price_level && $edit_price_level->time_frame == '1h' ? 'selected' : '' }}>1h</option>
+                                                <option value="4h" {{ $edit_price_level && $edit_price_level->time_frame == '4h' ? 'selected' : '' }}>4h</option>
+                                                <option value="D" {{ $edit_price_level && $edit_price_level->time_frame == 'D' ? 'selected' : '' }}>D</option>
+                                        </td>
                                         <td colspan="2">
                                             <input type="text" name="message" value="{{ $edit_price_level ? $edit_price_level->message : '' }}" class="form-control">
                                         </td>
@@ -68,7 +76,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-2"></div>
                 </div>
             </div>
         </div>

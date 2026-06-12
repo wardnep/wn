@@ -31,6 +31,7 @@ class AlertController extends Controller
             $price_level->active = true;
         }
 
+        $price_level->time_frame = $request->input('time_frame');
         $price_level->price = $request->input('price');
         $price_level->message = $request->input('message');
         $price_level->save();
