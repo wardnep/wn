@@ -46,8 +46,37 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: '/calendar/{{ $journey_id }}/events'
-            });
+                events: '/calendar/{{ $journey_id }}/events',
+
+                // ต้องอยู่ใน {} นี้
+                datesSet: function(info) {
+                    fetch(`/calendar/{{ $journey_id }}/month-summary?start=${info.startStr}&end=${info.endStr}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            var toolbar = document.querySelector('.fc-toolbar-title');
+                            if (!toolbar) return;
+
+                            var old = toolbar.querySelector('.month-total');
+                            if (old) old.remove();
+
+                            var badge = document.createElement('span');
+                            badge.className = 'month-total';
+                            badge.style.cssText = `
+                                font-size: 0.6em;
+                                margin-left: 12px;
+                                padding: 2px 10px;
+                                border-radius: 12px;
+                                background: ${data.total >= 0 ? '#28a745' : '#dc3545'};
+                                color: white;
+                                vertical-align: middle;
+                            `;
+                            badge.textContent = (data.total >= 0 ? '+' : '') + data.total.toFixed(1) + 'R';
+                            toolbar.appendChild(badge);
+                        });
+                }
+
+            }); // ปิด Calendar options
+
             calendar.render();
         });
     </script>

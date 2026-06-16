@@ -241,6 +241,11 @@ class JourneyController extends Controller
         return view('journey.summary.chart14', compact('items', 'r'));
     }
 
+    public function chart15($journey_id)
+    {
+
+    }
+
     public function download($journey_id)
     {
         $query = JourneyItem::where('journey_id', $journey_id);
