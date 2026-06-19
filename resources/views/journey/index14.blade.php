@@ -57,7 +57,7 @@
                                 </tr>
                             </thead> --}}
                             <tbody>
-                                @if (select_journey)
+                                @if ($select_journey)
                                     <form method="POST" action="{{ url('journey') }}" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="select_journey_id" value="{{ $select_journey ? $select_journey->id : 0 }}" />
