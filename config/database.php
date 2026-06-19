@@ -41,13 +41,7 @@ return [
             'prefix' => '',
         ],
 
-        'sqlite2' => [
-            'driver' => 'sqlite',
-            'database' => env('DB_DATABASE2', database_path('database.sqlite')),
-            'prefix' => '',
-        ],
-
-        'mysql' => [
+        'mysql2' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST2', '127.0.0.1'),

@@ -9,6 +9,7 @@ use App\Http\Controllers\QuantController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AlertController;
+use App\Http\Controllers\CVM\CvmController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -46,7 +47,4 @@ Route::middleware(['auth'])->group(function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('sizing', function () {
-    return view('sizing');
-});
-Route::get('test', [TestController::class, 'index']);
+Route::get('cvm', [CvmController::class, 'index']);
