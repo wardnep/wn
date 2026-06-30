@@ -238,7 +238,17 @@ class JourneyController extends Controller
         $loss = $items->where('result_r1', 'LOSS')->count();
         $r = ($win * 1.5) - ($loss * 1);
 
-        return view('journey.summary.chart14', compact('items', 'r'));
+        $win_loss = [];
+        $win_rate = [];
+        foreach ($items as $item) {
+            $win = JourneyItem::where('journey_id', $journey_id)->where('id', '<=', $item->id)->where('result_r1', 'WIN')->count();
+            $loss = JourneyItem::where('journey_id', $journey_id)->where('id', '<=', $item->id)->where('result_r1', 'LOSS')->count();
+
+            $win_loss[] = $win - $loss;
+            $win_rate[] = ($win / ($win + $loss)) * 100;
+        }
+
+        return view('journey.summary.chart14', compact('items', 'r', 'win_loss', 'win_rate'));
     }
 
     public function chart15($journey_id)
