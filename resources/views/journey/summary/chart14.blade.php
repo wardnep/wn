@@ -5,7 +5,7 @@
 <script>
     var option1 = {
 		title: {
-            text: "{{ $r }}R ({{ $items->count() }}) - Profit/Loss"
+            text: "{{ $r }}R - {{ $items->count() }} trades"
         },
 		tooltip: {
 			trigger: 'axis',
