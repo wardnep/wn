@@ -137,7 +137,7 @@
 
 	var option3 = {
 		title: {
-            text: "Win/Loss"
+            text: "Win - Loss"
         },
 		tooltip: {
 			trigger: 'axis',
