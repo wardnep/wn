@@ -48,7 +48,7 @@ class JourneyController extends Controller
             $default_date = $select_journey->items()->latest()->first()->date;
             $default_size = $select_journey->items()->latest()->first()->size;
         } else {
-            if ($select_journey_id !== 15 && $select_journey_id !== 14) {
+            if ($select_journey_id !== 16 && $select_journey_id !== 15 && $select_journey_id !== 14) {
                 $default_date = date2DateThai(Carbon::now()->format('d/m/Y'));
                 $default_size = '';
             } else {
@@ -59,7 +59,7 @@ class JourneyController extends Controller
 
         $total = JourneyItem::count();
 
-        if ($select_journey_id == 14 || $select_journey_id == 15) {
+        if ($select_journey_id == 14 || $select_journey_id == 15 || $select_journey_id == 16) {
             return view('journey.index14', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total', 'last_page'));
         }
 
