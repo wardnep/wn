@@ -18,7 +18,7 @@
                                 @endforeach
                             </select>
                         </form>
-                        @if ($select_journey_id !== 16)
+                        @if ($select_journey->id !== 16)
                             @include('journey.summary.snr16')
                         @else
                             @include('journey.summary.snr14')
