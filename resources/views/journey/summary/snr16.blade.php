@@ -99,7 +99,7 @@ use App\Models\JourneyItem;
         Recovery Factor <b>{{ number_format($rf, 2) }}</b>
     </div>
     <div class="col-md-2">
-        Total R <b>{{ $total * $expectancy }}</b> ({{ $select_journey->id }})
+        Total R <b>{{ number_format($total * $expectancy, 2) }}</b>
     </div>
     <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
         <span class="fas fa-calendar" />
