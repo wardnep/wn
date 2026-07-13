@@ -236,7 +236,11 @@ class JourneyController extends Controller
 
         $win = $items->where('result_r1', 'WIN')->count();
         $loss = $items->where('result_r1', 'LOSS')->count();
-        $r = ($win * 1.5) - ($loss * 1);
+        if ($journey_id == 16) {
+            $r = ($win * 2) - ($loss * 1);
+        } else {
+            $r = ($win * 1.5) - ($loss * 1);
+        }
 
         $win_loss = [];
         $win_rate = [];
