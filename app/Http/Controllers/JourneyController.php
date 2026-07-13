@@ -248,6 +248,10 @@ class JourneyController extends Controller
             $win_rate[] = ($win / ($win + $loss)) * 100;
         }
 
+        if ($journey_id == 16) {
+            return view('journey.summary.chart16', compact('items', 'r', 'win_loss', 'win_rate'));
+        }
+
         return view('journey.summary.chart14', compact('items', 'r', 'win_loss', 'win_rate'));
     }
 
