@@ -18,7 +18,11 @@
                                 @endforeach
                             </select>
                         </form>
-                        @include('journey.summary.snr14')
+                        @if ($select_journey_id !== 16)
+                            @include('journey.summary.snr16')
+                        @else
+                            @include('journey.summary.snr14')
+                        @endif
                     </div>
                     <div class="col-md-3">
                         <form id="note_from" method="POST" action="{{ url('journey/note') }}">
