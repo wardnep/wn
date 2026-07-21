@@ -67,10 +67,14 @@ use App\Models\JourneyItem;
     $rf = $dd > 0 ? $net_profit / $dd : 0;
 
     // Order / Day
-    $start = Carbon::createFromFormat('d M Y', $items->first()->date);
-    $end   = Carbon::createFromFormat('d M Y', $items->last()->date);
-    $date_count = $start->diffInWeekdays($end) + ($start->isWeekday() ? 1 : 0);
-    $obd = $date_count > 0 ? number_format($total / $date_count, 2) : 0;
+    if ($items->first()) {
+        $start = Carbon::createFromFormat('d M Y', $items->first()->date);
+        $end   = Carbon::createFromFormat('d M Y', $items->last()->date);
+        $date_count = $start->diffInWeekdays($end) + ($start->isWeekday() ? 1 : 0);
+        $obd = $date_count > 0 ? number_format($total / $date_count, 2) : 0;
+    } else {
+        $obd = 0;
+    }
 @endphp
 <div class="row">
     <div class="col-md-2">
