@@ -46,7 +46,7 @@ const PositionSizing = () => {
             <div className="card-header">
                 <h3 className="card-title">
                     <i className="fas fa-calculator mr-1" />
-                    Position Sizing — Binance Futures - claude.ai (Sonnet 5)
+                    Position Sizing — Binance Futures
                 </h3>
             </div>
 
@@ -188,6 +188,7 @@ const PositionSizing = () => {
                         )}
                     </div>
                 )}
+                <small>* claude.ai (Sonnet 5)</small>
             </div>
         </div>
     );

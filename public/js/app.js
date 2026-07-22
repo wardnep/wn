@@ -113,7 +113,7 @@ var PositionSizing = function PositionSizing() {
         className: "card-title",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
           className: "fas fa-calculator mr-1"
-        }), "Position Sizing \u2014 Binance Futures - claude.ai (Sonnet 5)"]
+        }), "Position Sizing \u2014 Binance Futures"]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "card-body",
@@ -284,6 +284,8 @@ var PositionSizing = function PositionSizing() {
             })]
           })]
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("small", {
+        children: "* claude.ai (Sonnet 5)"
       })]
     })]
   });
