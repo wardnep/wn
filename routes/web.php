@@ -9,6 +9,7 @@ use App\Http\Controllers\QuantController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AlertController;
+use App\Http\Controllers\PositionSizingController;
 use App\Http\Controllers\CVM\CvmController;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -45,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('journey', [JourneyController::class, 'storeOrUpdate']);
 });
 
+Route::get('position_sizing', [PositionSizingController::class, 'index']);
+
 Auth::routes(['register' => false]);
 
-Route::get('cvm', [CvmController::class, 'index']);
+// Route::get('cvm', [CvmController::class, 'index']);
+
