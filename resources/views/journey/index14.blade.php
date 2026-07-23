@@ -18,9 +18,11 @@
                                 @endforeach
                             </select>
                         </form>
-                        @if ($select_journey->id == 16)
+                        @if ($select_journey->id == 16 || $select_journey->id == 17)
+                            {{-- RR 1:2 --}}
                             @include('journey.summary.snr16')
                         @else
+                            {{-- RR 1:1.5 --}}
                             @include('journey.summary.snr14')
                         @endif
                     </div>
