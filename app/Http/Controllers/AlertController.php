@@ -10,7 +10,7 @@ class AlertController extends Controller
 {
     public function index($edit_id = 0)
     {
-        $price_levels = PriceLevel::all();
+        $price_levels = PriceLevel::all()->sortByDesc('price', SORT_NUMERIC);
         $price_levels->count();
 
         $edit_price_level = null;
