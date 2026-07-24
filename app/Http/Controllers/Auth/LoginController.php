@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Rules\Turnstile;
 
+use App\Models\AccessIp;
+
 class LoginController extends Controller
 {
     /*
@@ -47,5 +49,12 @@ class LoginController extends Controller
             'password' => 'required|string',
             'cf-turnstile-response' => ['required', new Turnstile],
         ]);
+    }
+
+     protected function authenticated(Request $request, $user)
+    {
+        $access_ip = new AccessIp();
+        $access_ip->ip = $request->header('CF-Connecting-IP') ?? $request->ip();
+        $access_ip->save();
     }
 }
