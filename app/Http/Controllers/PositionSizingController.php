@@ -12,6 +12,7 @@ class PositionSizingController extends Controller
     {
         $access_ip = new AccessIp();
         $access_ip->ip = $request->header('CF-Connecting-IP') ?? $request->ip();
+        $access_ip->page = 'position_sizing';
         $access_ip->save();
 
         return view('position_sizing.index');
