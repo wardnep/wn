@@ -9,7 +9,7 @@ use App\Models\AccessIp;
 
 class PositionSizingController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, IpWhoisService $whois)
     {
         $access_ip = new AccessIp();
         $access_ip->ip = $request->header('CF-Connecting-IP') ?? $request->ip();
