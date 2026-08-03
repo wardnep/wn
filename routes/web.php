@@ -44,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('journey/delete/{journey_id}/{edit_journey_item_id}', [JourneyController::class, 'delete']);
     Route::get('journey/{select_journey_id?}/{edit_journey_item_id?}/{sort_column?}/{sort_direction?}', [JourneyController::class, 'index']);
     Route::post('journey', [JourneyController::class, 'storeOrUpdate']);
+
+    Route::get('test', [TestController::class, 'index']);
 });
 
 Route::get('position_sizing', [PositionSizingController::class, 'index']);
