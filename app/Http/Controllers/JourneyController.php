@@ -238,7 +238,7 @@ class JourneyController extends Controller
 
         $win = $items->where('result_r1', 'WIN')->count();
         $loss = $items->where('result_r1', 'LOSS')->count();
-        if ($journey_id == 16) {
+        if ($journey_id == 16 || $journey_id == 17) {
             $r = ($win * 2) - ($loss * 1);
         } else {
             $r = ($win * 1.5) - ($loss * 1);
@@ -254,7 +254,7 @@ class JourneyController extends Controller
             $win_rate[] = ($win / ($win + $loss)) * 100;
         }
 
-        if ($journey_id == 16) {
+        if ($journey_id == 16 || $journey_id == 17) {
             return view('journey.summary.chart16', compact('items', 'r', 'win_loss', 'win_rate'));
         }
 
