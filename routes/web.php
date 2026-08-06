@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('journey', [JourneyController::class, 'storeOrUpdate']);
 
     Route::get('test', [TestController::class, 'index']);
+    Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 });
 
 Route::get('position_sizing', [PositionSizingController::class, 'index']);

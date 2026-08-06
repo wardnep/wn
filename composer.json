@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "league/flysystem-aws-s3-v3": "~1.0",
-        "onecentlin/laravel-adminer": "^8.0"
+        "onecentlin/laravel-adminer": "^8.0",
+        "rap2hpoutre/laravel-log-viewer": "^2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
