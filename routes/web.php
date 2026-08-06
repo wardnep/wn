@@ -22,9 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('quant', [QuantController::class, 'index']);
     Route::get('quant/logs', [QuantController::class, 'logs']);
 
-    Route::get('/calendar/{journey_id}', [CalendarController::class, 'index']);
-    Route::get('/calendar/{journey_id}/events', [CalendarController::class, 'events']);
-    Route::get('/calendar/{journey_id}/month-summary', [CalendarController::class, 'monthSummary']);
+    Route::get('/calendar/{journey_id}/{rr?}', [CalendarController::class, 'index']);
+    Route::get('/calendar/{journey_id}/events/{rr?}', [CalendarController::class, 'events']);
+    Route::get('/calendar/{journey_id}/month-summary/{rr?}', [CalendarController::class, 'monthSummary']);
 
     Route::get('journey/test', [JourneyController::class, 'test']);
     Route::get('journey/summary_tp', [JourneyController::class, 'summary_tp']);

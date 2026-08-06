@@ -11,26 +11,28 @@ use App\Models\JourneyItem;
 
 class CalendarController extends Controller
 {
-    public function index($journey_id)
+    public function index($journey_id, $rr = 1.5)
     {
         $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
 
+        // dd($items);
+
         $total = 0;
         foreach ($items as $item) {
-            $win = JourneyItem::where('date', $item->date)->where('result_r1', 'WIN')->count();
-            $loss = JourneyItem::where('date', $item->date)->where('result_r1', 'LOSS')->count();
-            $r = ($win * 1.5) - ($loss * 1);
+            $win = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
+            $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
+            $r = ($win * $rr) - ($loss * 1);
 
             $total += $r;
         }
 
-        return view('calendar', compact('journey_id', 'total'));
+        return view('calendar', compact('journey_id', 'total', 'rr'));
     }
 
-    public function monthSummary($journey_id, Request $request)
+    public function monthSummary($journey_id, Request $request, $rr = 1.5)
     {
         $start = $request->get('start'); // Y-m-d
-        $end   = $request->get('end');
+        $end = $request->get('end');
 
         // แปลงกลับเป็น format ที่ใช้ใน DB (d M Y)
         $items = JourneyItem::where('journey_id', $journey_id)
@@ -42,25 +44,27 @@ class CalendarController extends Controller
             $date = Carbon::createFromFormat('d M Y', $item->date)->format('Y-m-d');
 
             if ($date >= $start && $date < $end) {
-                $win  = JourneyItem::where('date', $item->date)->where('result_r1', 'WIN')->count();
-                $loss = JourneyItem::where('date', $item->date)->where('result_r1', 'LOSS')->count();
-                $total += ($win * 1.5) - ($loss * 1);
+                $win  = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
+                $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
+                $total += ($win * $rr) - ($loss * 1);
             }
         }
 
         return response()->json(['total' => $total]);
     }
 
-    public function events($journey_id)
+    public function events($journey_id, $rr = 1.5)
     {
         $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
+
+        // dd($items);
 
         $total = 0;
         $datas = [];
         foreach ($items as $item) {
-            $win = JourneyItem::where('date', $item->date)->where('result_r1', 'WIN')->count();
-            $loss = JourneyItem::where('date', $item->date)->where('result_r1', 'LOSS')->count();
-            $r = ($win * 1.5) - ($loss * 1);
+            $win = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
+            $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
+            $r = ($win * $rr) - ($loss * 1);
 
             $total_trade = $win + $loss;
 
