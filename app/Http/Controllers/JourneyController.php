@@ -14,8 +14,17 @@ use App\Models\JourneyItem;
 
 class JourneyController extends Controller
 {
-    public function index(Request $request, $select_journey_id = 15, $edit_journey_item_id = 0, $sort_column = 'id', $sort_direction = 'ASC')
+    public function index(Request $request, $select_journey_id = 0, $edit_journey_item_id = 0, $sort_column = 'id', $sort_direction = 'ASC')
     {
+        if (!$select_journey_id) {
+            $select_journey = Journey::where('default', true)->first();
+            if ($select_journey) {
+                $select_journey_id = $select_journey->id;
+            } else {
+                $select_journey_id = 15;
+            }
+        }
+
         $exclude_asia = 'Y';
         $exclude_london = 'Y';
         $exclude_london_ny = $request->exclude_london_ny ?: 'N';
@@ -263,7 +272,20 @@ class JourneyController extends Controller
 
     public function chart15($journey_id)
     {
+        $journey = Journey::find($journey_id);
+        $journey->default = true;
+        $journey->save();
+    }
 
+    public function default($journey_id)
+    {
+        Journey::query()->update(['default' => false]);
+
+        $journey = Journey::find($journey_id);
+        $journey->default = true;
+        $journey->save();
+
+        return back();
     }
 
     public function download($journey_id)

@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('journey/chart14/{journey_id}', [JourneyController::class, 'chart14']);
     Route::get('journey/summary', [JourneyController::class, 'summary']);
     Route::post('journey/note', [JourneyController::class, 'note']);
+    Route::post('journey/default', [JourneyController::class, 'default']);
     Route::get('journey/delete/{journey_id}/{edit_journey_item_id}', [JourneyController::class, 'delete']);
     Route::get('journey/{select_journey_id?}/{edit_journey_item_id?}/{sort_column?}/{sort_direction?}', [JourneyController::class, 'index']);
     Route::post('journey', [JourneyController::class, 'storeOrUpdate']);
