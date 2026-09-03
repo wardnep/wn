@@ -87,7 +87,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="6">
                                                 <textarea class="form-control" name="note" rows="3">{{ $edit_journey_item ? $edit_journey_item->note : '' }}</textarea>
                                             </td>
                                             <td></td>
