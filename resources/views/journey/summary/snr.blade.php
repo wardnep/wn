@@ -14,7 +14,7 @@ use App\Models\JourneyItem;
     $loss_rate = 1 - $win_rate;
 
     // Expectancy
-    $expectancy = ($win_rate * 1.5) - ($loss_rate * 1);
+    $expectancy = ($win_rate * $select_journey->rr) - ($loss_rate * 1);
 
     // Drawdown
     $equity = 0;
@@ -31,7 +31,7 @@ use App\Models\JourneyItem;
         //
         // Drawdown
         //
-        $r = $item->result_r1 === 'WIN' ? 1.5 : -1;
+        $r = $item->result_r1 === 'WIN' ? $select_journey->rr : -1;
         $equity += $r;
         $peak = max($peak, $equity);
         $dd = max($dd, $peak - $equity);
@@ -110,7 +110,7 @@ use App\Models\JourneyItem;
     <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
         <span class="fas fa-calendar" />
     </a>
-    <a href="{{ url('journey/chart14/'.$select_journey->id) }}" class="btn btn-warning" target="_blank">
+    <a href="{{ url('journey/chart/'.$select_journey->id) }}" class="btn btn-warning" target="_blank">
         <i class="fas fa-chart-line"></i>
     </a>
 </div>

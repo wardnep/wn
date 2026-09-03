@@ -11,13 +11,13 @@ use App\Models\JourneyItem;
 
 class CalendarController extends Controller
 {
-    public function index($journey_id, $rr = 1.5)
+    public function index($journey_id)
     {
+        $journey = JourneyItem::find($journey_id);
         $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
 
-        // dd($items);
-
         $total = 0;
+        $rr = $journey->rr;
         foreach ($items as $item) {
             $win = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
             $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
@@ -29,8 +29,9 @@ class CalendarController extends Controller
         return view('calendar', compact('journey_id', 'total', 'rr'));
     }
 
-    public function monthSummary($journey_id, Request $request, $rr = 1.5)
+    public function monthSummary($journey_id, Request $request)
     {
+        $journey = JourneyItem::find($journey_id);
         $start = $request->get('start'); // Y-m-d
         $end = $request->get('end');
 
@@ -46,25 +47,24 @@ class CalendarController extends Controller
             if ($date >= $start && $date < $end) {
                 $win  = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
                 $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
-                $total += ($win * $rr) - ($loss * 1);
+                $total += ($win * $journey->rr) - ($loss * 1);
             }
         }
 
         return response()->json(['total' => $total]);
     }
 
-    public function events($journey_id, $rr = 1.5)
+    public function events($journey_id)
     {
+        $journey = JourneyItem::find($journey_id);
         $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
-
-        // dd($items);
 
         $total = 0;
         $datas = [];
         foreach ($items as $item) {
             $win = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
             $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
-            $r = ($win * $rr) - ($loss * 1);
+            $r = ($win * $journey->rr) - ($loss * 1);
 
             $total_trade = $win + $loss;
 

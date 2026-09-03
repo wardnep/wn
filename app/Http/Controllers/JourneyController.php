@@ -18,17 +18,13 @@ class JourneyController extends Controller
     {
         if (!$select_journey_id) {
             $select_journey = Journey::where('default', true)->first();
+
             if ($select_journey) {
                 $select_journey_id = $select_journey->id;
             } else {
-                $select_journey_id = 15;
+                $select_journey_id = Journey::latest()->first()->id;
             }
         }
-
-        $exclude_asia = 'Y';
-        $exclude_london = 'Y';
-        $exclude_london_ny = $request->exclude_london_ny ?: 'N';
-        $exclude_ny = 'Y';
 
         $journeys = Journey::all();
 
@@ -40,41 +36,17 @@ class JourneyController extends Controller
         $edit_journey_item = JourneyItem::find($request->edit_journey_item_id);
 
         $query = JourneyItem::where('journey_id', $select_journey_id)->orderByDesc('id');
-         if ($exclude_asia == 'Y') {
-            $query->where('entry_session', '<>', 'Asia');
-        }
 
-
-        $item_per_page = 20;
-        if ($select_journey_id == 15) {
-            $item_per_page = 100;
-        }
+        $item_per_page = 50;
 
         $journey_items = $query->simplePaginate($item_per_page);
         $last_page = ceil($query->count() / $item_per_page);
 
-        $select_journey_ids = [14, 15, 16, 17];
-
-        if ($select_journey->items() && $select_journey->items()->latest()->first() && !in_array($select_journey_id, $select_journey_ids)) {
-            $default_date = $select_journey->items()->latest()->first()->date;
-            $default_size = $select_journey->items()->latest()->first()->size;
-        } else {
-            if (!in_array($select_journey_id, $select_journey_ids)) {
-                $default_date = date2DateThai(Carbon::now()->format('d/m/Y'));
-                $default_size = '';
-            } else {
-                $default_date = Carbon::now()->format('d M Y');
-                $default_size = '';
-            }
-        }
-
+        $default_date = date2DateThai(Carbon::now()->format('d/m/Y'));
+        $default_size = '';
         $total = JourneyItem::count();
 
-        if (in_array($select_journey_id, $select_journey_ids)) {
-            return view('journey.index14', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total', 'last_page'));
-        }
-
-        return view('journey.index', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total'));
+        return view('journey.index', compact('journeys', 'select_journey', 'journey_items', 'edit_journey_item', 'default_date', 'default_size', 'sort_column', 'sort_direction', 'exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny', 'total', 'last_page'));
     }
 
     public function storeOrUpdate(Request $request)
@@ -161,97 +133,13 @@ class JourneyController extends Controller
 
     public function chart($journey_id)
     {
-        return view('journey.summary.chart', compact('journey_id'));
-    }
-
-    // public function chart1()
-    // {
-    //     $items = JourneyChartData1::get();
-
-    //     return view('journey.summary.chart1', compact('items'));
-    // }
-
-    public function chart2($journey_id)
-    {
-        $items = JourneyItem::where('journey_id', $journey_id)->get();
-
-        // $items = JourneyItem::where('journey_id', 3)
-        //     ->orWhere('journey_id', 4)->get();
-
-        return view('journey.summary.chart2', compact('items'));
-    }
-
-    public function chart3($journey_id, $exclude_asia = 'N')
-    {
-        $months = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
-
-        $data = [];
-        foreach ($months as $month) {
-            if ($exclude_asia == 'N') {
-                $items = JourneyItem::where('journey_id', $journey_id)
-                    ->where('date', 'LIKE', "%$month%")->get();
-            } else {
-                $items = JourneyItem::where('journey_id', $journey_id)
-                    ->where('session', '<>', 'Asia')
-                    ->where('date', 'LIKE', "%$month%")->get();
-            }
-
-
-            $profit = 0;
-            $loss = 0;
-            foreach ($items as $item) {
-                if ($item->result == 'WIN') {
-                    $profit += $item->tp1 + $item->tp2;
-                }
-
-                if ($item->result == "LOSS") {
-                    $loss += $item->tp1 * 2;
-                }
-            }
-
-            $datas[] = [$month, $profit, $loss];
-        }
-
-        return view('journey.summary.chart3', compact('datas'));
-    }
-
-    public function chart4($journey_id)
-    {
-        $datas = [];
-        $prev_date = "";
-        $order_date_count = 0;
-        foreach (JourneyItem::where('journey_id', $journey_id)->distinct('date')->pluck('date') as $date) {
-            $order_count = JourneyItem::where('date', $date)->count();
-
-            $datas[] = [
-                $date,
-                $order_count
-            ];
-        }
-
-        return view('journey.summary.chart4', compact('datas'));
-    }
-
-    public function chart5($journey_id)
-    {
-        $query = JourneyItem::where('journey_id', $journey_id);
-        $query->where('entry_session', '<>', 'London');
-        $items = $query->get();
-
-        return view('journey.summary.chart5', compact('items'));
-    }
-
-    public function chart14($journey_id)
-    {
+        $journey = Journey::find($journey_id);
         $items = JourneyItem::where('journey_id', $journey_id)->get();
 
         $win = $items->where('result_r1', 'WIN')->count();
         $loss = $items->where('result_r1', 'LOSS')->count();
-        if ($journey_id == 16 || $journey_id == 17) {
-            $r = ($win * 2) - ($loss * 1);
-        } else {
-            $r = ($win * 1.5) - ($loss * 1);
-        }
+
+        $r = ($win * $journey->rr) - ($loss * 1);
 
         $win_loss = [];
         $win_rate = [];
@@ -263,18 +151,7 @@ class JourneyController extends Controller
             $win_rate[] = ($win / ($win + $loss)) * 100;
         }
 
-        if ($journey_id == 16 || $journey_id == 17) {
-            return view('journey.summary.chart16', compact('items', 'r', 'win_loss', 'win_rate'));
-        }
-
-        return view('journey.summary.chart14', compact('items', 'r', 'win_loss', 'win_rate'));
-    }
-
-    public function chart15($journey_id)
-    {
-        $journey = Journey::find($journey_id);
-        $journey->default = true;
-        $journey->save();
+        return view('journey.summary.chart', compact('items', 'r', 'win_loss', 'win_rate'));
     }
 
     public function default($journey_id)
@@ -288,38 +165,6 @@ class JourneyController extends Controller
         return back();
     }
 
-    public function download($journey_id)
-    {
-        $query = JourneyItem::where('journey_id', $journey_id);
-        // $query->where('exit_session', 'Asia');
-
-        $items = $query->get();
-        $data = [];
-        $count = 0;
-        foreach ($items as $item) {
-            $data[] = [
-                'no' => ++$count,
-                'date' => $item->date,
-                'entry_session' => $item->entry_session,
-                'exit_session' => $item->exit_session,
-                'result' => $item->result,
-                'sl' => $item->result == 'LOSS' ? $item->tp1 : '',
-                'tp1' => $item->result == 'WIN' ? $item->tp1 : '',
-                'r' => number_format($item->result_r1, 2),
-                'setup' => $item->strategy
-            ];
-        }
-
-        $start_date = $items->first() ? date2MySqlDate2($items->first()->date) : '';
-        $last_date = $items->first() ? date2MySqlDate2($items->sortByDesc('id')->first()->date) : '';
-        $start = Carbon::parse($start_date);
-        $end = Carbon::parse($last_date);
-
-        $part = "storage/reports/".$start->format('d-M-y')."_".$end->format('d-M-y').".xlsx";
-        (new FastExcel($data))->export($part);
-        return response()->download($part);
-    }
-
     public function image($journey_id, $journey_item_id) {
         $item = JourneyItem::find($journey_item_id);
         $prev_item = JourneyItem::where('journey_id', $journey_id)->where('id', '<', $journey_item_id)->first();
@@ -330,36 +175,5 @@ class JourneyController extends Controller
         $no = array_search($item->id, $ids) + 1;
 
         return view('journey.image', compact('item', 'prev_item', 'next_item', 'no', 'total'));
-    }
-
-    public function summary_tp(Request $request)
-    {
-        $exclude_asia = $request->exclude_asia ?: 'Y';
-        $exclude_london = $request->exclude_london ?: 'N';
-        $exclude_london_ny = $request->exclude_london_ny ?: 'N';
-        $exclude_ny = $request->exclude_ny ?: 'N';
-
-        return view('journey.summary.summary_tp', compact('exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
-    }
-
-    public function summary_tp1($exclude_asia, $exclude_london, $exclude_london_ny, $exclude_ny)
-    {
-        return view('journey.summary.summary_tp1', compact('exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
-    }
-
-    public function summary_tp2($exclude_asia, $exclude_london, $exclude_london_ny, $exclude_ny)
-    {
-        return view('journey.summary.summary_tp2', compact('exclude_asia', 'exclude_london', 'exclude_london_ny', 'exclude_ny'));
-    }
-
-    public function test()
-    {
-        $items = JourneyItem::where('journey_id', 12)->get();
-        foreach ($items as $item) {
-            $item->size = '1%';
-            $item->save();
-        }
-
-        dd('done');
     }
 }

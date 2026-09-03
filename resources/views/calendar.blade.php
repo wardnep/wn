@@ -46,11 +46,11 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: '/calendar/{{ $journey_id }}/events/{{ $rr }}',
+                events: '/calendar/{{ $journey_id }}/events',
 
                 // ต้องอยู่ใน {} นี้
                 datesSet: function(info) {
-                    fetch(`/calendar/{{ $journey_id }}/month-summary/{{ $rr }}?start=${info.startStr}&end=${info.endStr}`)
+                    fetch(`/calendar/{{ $journey_id }}/month-summary?start=${info.startStr}&end=${info.endStr}`)
                         .then(res => res.json())
                         .then(data => {
                             var toolbar = document.querySelector('.fc-toolbar-title');
