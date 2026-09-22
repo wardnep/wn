@@ -42,7 +42,7 @@ class JourneyController extends Controller
         $journey_items = $query->simplePaginate($item_per_page);
         $last_page = ceil($query->count() / $item_per_page);
 
-        $default_date = date2DateThai(Carbon::now()->format('d/m/Y'));
+        $default_date = Carbon::now()->format('d M Y');
         $default_size = '';
         $total = JourneyItem::count();
 
