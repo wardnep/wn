@@ -1,4 +1,24 @@
-@servers(['prod' => ['wardnep@wn']])
+@servers(['prod' => ['user01@athikit -p14321']])
+
+@task('deploy', ['on' => 'prod'])
+	cd /var/www/wn
+	release=$(date +%Y%m%d%H%M%S)
+	GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_deploy -o StrictHostKeyChecking=no" \
+	git clone git@github.com:wardnep/wn.git $release
+	cd $release
+	composer install --quiet
+	ln -s ../env .env
+	rm -rf storage
+	ln -s ../storage storage
+	php artisan migrate --no-interaction
+	php artisan optimize
+	php artisan config:clear
+  	cd ..
+	ln -sfn $release current
+	find . -maxdepth 1 -name "2*" | sort | head -n -2 | xargs rm -Rf
+@endtask
+
+{{-- @servers(['prod' => ['wardnep@wn']])
 
 @task('deploy', ['on' => 'prod'])
 	cd /var/www/wn
@@ -16,4 +36,4 @@
   	cd ..
 	ln -sfn $release current
 	find . -maxdepth 1 -name "2*" | sort | head -n -2 | xargs rm -Rf
-@endtask
+@endtask --}}
