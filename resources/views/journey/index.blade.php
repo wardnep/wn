@@ -49,7 +49,7 @@
 
                         {{-- Add / Edit item form (kept inside table-responsive so its row scrolls too) --}}
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" style="min-width: 700px;">
+                            <table class="table table-bordered table-striped" style="width: 100%; min-width: 700px;">
                                 <tbody>
                                     <form method="POST" action="{{ url('journey') }}" enctype="multipart/form-data">
                                         @csrf
@@ -73,7 +73,8 @@
                                                 </select>
                                             </td>
                                             <td colspan="2">
-                                                <input type="file" name="image" />
+                                                {{-- <input type="file" name="image" /> --}}
+                                                <input type="text" name="image" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->image : '' }}" />
                                             </td>
                                             <td style="white-space: nowrap;">
                                                 <button type="submit" class="btn btn-primary">
@@ -90,7 +91,6 @@
                                             <td colspan="6">
                                                 <textarea class="form-control" name="note" rows="3">{{ $edit_journey_item ? $edit_journey_item->note : '' }}</textarea>
                                             </td>
-                                            <td></td>
                                         </tr>
                                     </form>
 
@@ -117,11 +117,9 @@
                                             <td>{!! $item->dposition !!}</td>
                                             <td>{!! $item->dresult_r1 !!}</td>
                                             <td>
-                                                @if ($item->image)
-                                                    <a href="{{ url('journey/image/'.$select_journey->id.'/'.$item->id) }}" target="_blank">
-                                                        <img src="{{ $item->dimage }}" width="50px" title="{{ $item->note }}" />
-                                                    </a>
-                                                @endif
+                                                <a href="{{ url('journey/image/'.$select_journey->id.'/'.$item->id) }}" target="_blank">
+                                                    <img src="{{ $item->dimage }}" width="50px" title="{{ $item->note }}" />
+                                                </a>
                                             </td>
                                             <td>{!! $item->note !!}</td>
                                             <td style="white-space: nowrap;">

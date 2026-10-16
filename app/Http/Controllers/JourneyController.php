@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 use Carbon\Carbon;
 use Rap2hpoutre\FastExcel\FastExcel;
@@ -59,19 +60,23 @@ class JourneyController extends Controller
         }
 
         if ($request->image) {
-            if ($item->image) {
-                Storage::disk('r2')->delete($item->image);
+            if (Str::startsWith($request->image, 'http')) {
+                $item->image = $request->image;
+            } else {
+                if ($item->image) {
+                    Storage::disk('r2')->delete($item->image);
+                }
+
+                $filename = uniqid().'.'.$request->image->guessExtension();
+                $image_path = Storage::disk('r2')->putFileAs(
+                    '/',
+                    $request->image,
+                    $filename,
+                    'public'
+                );
+
+                $item->image = $image_path;
             }
-
-            $filename = uniqid().'.'.$request->image->guessExtension();
-            $image_path = Storage::disk('r2')->putFileAs(
-                '/',
-                $request->image,
-                $filename,
-                'public'
-            );
-
-            $item->image = $image_path;
         } else if ($is_create) {
             $item->image = '';
         }

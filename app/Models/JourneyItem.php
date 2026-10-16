@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class JourneyItem extends Model
 {
@@ -156,7 +157,11 @@ class JourneyItem extends Model
     public function getDimageAttribute()
     {
         if ($this->image) {
-            return 'https://athikit.co.th/'.$this->image;
+            if (Str::startsWith($this->image, 'http')) {
+                return $this->image;
+            } else {
+                return 'https://athikit.co.th/'.$this->image;
+            }
         }
 
         return '';
