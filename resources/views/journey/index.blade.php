@@ -73,6 +73,9 @@
                                                 </select>
                                             </td>
                                             <td colspan="2">
+                                                <input type="text" name="grade" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->grade : '' }}" />
+                                            </td>
+                                            <td colspan="2">
                                                 {{-- <input type="file" name="image" /> --}}
                                                 <input type="text" name="image" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->image : '' }}" />
                                             </td>
@@ -98,6 +101,7 @@
                                         <td width="150px"><b>Date</b></td>
                                         <td><b>Position</b></td>
                                         <td><b>Result</b></td>
+                                        <td><b>Grade</b></td>
                                         <td><b>Image</b></td>
                                         <td><b>Note</b></td>
                                         <td width="200px"></td>
@@ -116,6 +120,7 @@
                                             <td>{{ $item->date }}</td>
                                             <td>{!! $item->dposition !!}</td>
                                             <td>{!! $item->dresult_r1 !!}</td>
+                                            <td>{!! $item->dgrade !!}</td>
                                             <td>
                                                 <a href="{{ url('journey/image/'.$select_journey->id.'/'.$item->id) }}" target="_blank">
                                                     <img src="{{ $item->dimage }}" width="50px" title="{{ $item->note }}" />
