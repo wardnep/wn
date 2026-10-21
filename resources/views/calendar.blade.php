@@ -47,8 +47,8 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 events: '/calendar/{{ $journey_id }}/events',
+                colorScheme: 'dark',
 
-                // ต้องอยู่ใน {} นี้
                 datesSet: function(info) {
                     fetch(`/calendar/{{ $journey_id }}/month-summary?start=${info.startStr}&end=${info.endStr}`)
                         .then(res => res.json())

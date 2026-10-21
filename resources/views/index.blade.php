@@ -9,48 +9,79 @@
     <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px 16px;
-            box-sizing: border-box;
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
-        }
-        .menu {
-            width: 100%;
-            max-width: 420px;
-            text-align: center;
-        }
-        .menu-group {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 24px;
-        }
-        .menu-group:last-child { margin-bottom: 0; }
-        .menu a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px 16px;       /* tap target >= 44px */
-            min-height: 44px;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-        .menu a:hover,
-        .menu a:focus-visible {
-            background: rgba(0, 0, 0, .06);
-        }
-        .menu i {
-            width: 1.25em;
-            text-align: center;
-        }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        box-sizing: border-box;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+
+        /* Dark theme */
+        background-color: #121418;
+        color: #e5e7eb;
+    }
+
+    .menu {
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+    }
+
+    .menu-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+
+    .menu-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .menu a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 16px;
+        min-height: 44px;
+        box-sizing: border-box;
+        border: 1px solid #30343b;
+        border-radius: 8px;
+        background-color: #1c2027;
+        color: #e5e7eb;
+        text-decoration: none;
+        transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .menu a:hover,
+    .menu a:focus-visible {
+        background-color: #252d3a;
+        border-color: #4f8cff;
+        color: #8ab4ff;
+        outline: none;
+    }
+
+    .menu i {
+        width: 1.25em;
+        text-align: center;
+        color: #60a5fa;
+    }
+
+    .menu a:hover i,
+    .menu a:focus-visible i {
+        color: #93c5fd;
+    }
+
     </style>
 </head>
 <body>
