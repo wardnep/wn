@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 
+use App\Models\Journey;
 use App\Models\JourneyItem;
 
 class CalendarController extends Controller
 {
     public function index($journey_id)
     {
-        $journey = JourneyItem::find($journey_id);
+        $journey = Journey::find($journey_id);
         $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
 
         $total = 0;
@@ -31,11 +32,10 @@ class CalendarController extends Controller
 
     public function monthSummary($journey_id, Request $request)
     {
-        $journey = JourneyItem::find($journey_id);
-        $start = $request->get('start'); // Y-m-d
+        $journey = Journey::find($journey_id);
+        $start = $request->get('start');
         $end = $request->get('end');
 
-        // แปลงกลับเป็น format ที่ใช้ใน DB (d M Y)
         $items = JourneyItem::where('journey_id', $journey_id)
             ->groupBy('date')
             ->get();
@@ -56,7 +56,7 @@ class CalendarController extends Controller
 
     public function events($journey_id)
     {
-        $journey = JourneyItem::find($journey_id);
+        $journey = Journey::find($journey_id);
         $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
 
         $total = 0;
@@ -65,6 +65,8 @@ class CalendarController extends Controller
             $win = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
             $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
             $r = ($win * $journey->rr) - ($loss * 1);
+
+            // return response()->json([$r, $win, $journey->rr, $loss]);
 
             $total_trade = $win + $loss;
 
@@ -83,7 +85,7 @@ class CalendarController extends Controller
                 }
 
                 $datas[] = [
-                    'title' => "{$r}R ($total_trade)",
+                    'title' => "{$r}R",
                     'start' => $date,
                     'classNames' => $class
                 ];

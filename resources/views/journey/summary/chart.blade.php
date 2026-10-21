@@ -61,7 +61,7 @@
 					@foreach ($items as $item)
 					@php
 						if ($item->result_r1 === 'WIN') {
-							$profit += 1.5;
+							$profit += 2;
 						} else {
 							$profit -= 1;
 						}
