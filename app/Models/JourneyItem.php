@@ -77,27 +77,28 @@ class JourneyItem extends Model
 
     public function getDresultR1Attribute()
     {
-        $color = match ($this->result_r1) {
+        $colors = [
             'WIN'   => '#4ADE80',   // เขียวสว่าง
             'LOSS'  => '#FF5252',   // แดงสว่าง ไม่แสบตา
-            'BE',
-            'CLOSE' => '#60A5FA',   // ฟ้าสว่าง แทนน้ำเงินล้วน
-            default => '',
-        };
+            'BE'    => '#60A5FA',   // ฟ้าสว่าง
+            'CLOSE' => '#60A5FA',   // ฟ้าสว่าง
+        ];
+
+        $color = $colors[$this->result_r1] ?? '';
 
         return "<font color=\"$color\">$this->result_r1</font>";
     }
 
     public function getDresultR2Attribute()
     {
-        $color = '';
-        $color = match ($this->result_r2) {
+        $colors = [
             'WIN'   => '#4ADE80',   // เขียวสว่าง
             'LOSS'  => '#FF5252',   // แดงสว่าง ไม่แสบตา
-            'BE',
-            'CLOSE' => '#60A5FA',   // ฟ้าสว่าง แทนน้ำเงินล้วน
-            default => '',
-        };
+            'BE'    => '#60A5FA',   // ฟ้าสว่าง
+            'CLOSE' => '#60A5FA',   // ฟ้าสว่าง
+        ];
+
+        $color = $colors[$this->result_r2] ?? '';
 
         return "<font color=\"$color\">$this->result_r2</font>";
     }
