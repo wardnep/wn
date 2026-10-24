@@ -107,6 +107,7 @@ use App\Models\JourneyItem;
     <div class="col-md-2">
         Total R <b>{{ $total * $expectancy }}</b>
     </div>
+    <br />
     <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
         <span class="fas fa-calendar" />
     </a>
