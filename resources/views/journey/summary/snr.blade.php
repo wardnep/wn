@@ -107,11 +107,12 @@ use App\Models\JourneyItem;
     <div class="col-md-2">
         Total R <b>{{ $total * $expectancy }}</b>
     </div>
-    <br />
-    <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
-        <span class="fas fa-calendar" />
-    </a>
-    <a href="{{ url('journey/chart/'.$select_journey->id) }}" class="btn btn-warning" target="_blank">
-        <i class="fas fa-chart-line"></i>
-    </a>
+    <div class="col-md-12">
+        <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
+            <span class="fas fa-calendar" />
+        </a>
+        <a href="{{ url('journey/chart/'.$select_journey->id) }}" class="btn btn-warning" target="_blank">
+            <i class="fas fa-chart-line"></i>
+        </a>
+    </div>
 </div>
