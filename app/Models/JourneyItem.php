@@ -77,16 +77,13 @@ class JourneyItem extends Model
 
     public function getDresultR1Attribute()
     {
-        $color = '';
-        if ($this->result_r1 == 'WIN') {
-            $color = '#2E5E3A';
-        } else if ($this->result_r1 == 'LOSS') {
-            $color = '#FF0000';
-        } else if ($this->result_r1 == 'BE') {
-            $color = '#0000FF';
-        } else if ($this->result_r1 == 'CLOSE') {
-            $color = '#0000FF';
-        }
+        $color = match ($this->result_r1) {
+            'WIN'   => '#4ADE80',   // เขียวสว่าง
+            'LOSS'  => '#FF5252',   // แดงสว่าง ไม่แสบตา
+            'BE',
+            'CLOSE' => '#60A5FA',   // ฟ้าสว่าง แทนน้ำเงินล้วน
+            default => '',
+        };
 
         return "<font color=\"$color\">$this->result_r1</font>";
     }
@@ -94,15 +91,13 @@ class JourneyItem extends Model
     public function getDresultR2Attribute()
     {
         $color = '';
-        if ($this->result_r2 == 'WIN') {
-            $color = '#2E5E3A';
-        } else if ($this->result_r2 == 'LOSS') {
-            $color = '#FF0000';
-        } else if ($this->result_r2 == 'BE') {
-            $color = '#0000FF';
-        } else if ($this->result_r2 == 'CLOSE') {
-            $color = '#0000FF';
-        }
+        $color = match ($this->result_r2) {
+            'WIN'   => '#4ADE80',   // เขียวสว่าง
+            'LOSS'  => '#FF5252',   // แดงสว่าง ไม่แสบตา
+            'BE',
+            'CLOSE' => '#60A5FA',   // ฟ้าสว่าง แทนน้ำเงินล้วน
+            default => '',
+        };
 
         return "<font color=\"$color\">$this->result_r2</font>";
     }
@@ -179,17 +174,17 @@ class JourneyItem extends Model
     public function getDgradeAttribute()
     {
         if ($this->grade == 'A+') {
-            $color = '#1B5E20';
+            $color = '#00E676';   // เขียวสว่างสุด
         } else if ($this->grade == 'A') {
-            $color = '#2E7D32';
+            $color = '#4ADE80';
         } else if ($this->grade == 'B') {
-            $color = '#F9A825';
+            $color = '#FACC15';
         } else if ($this->grade == 'C') {
-            $color = '#FB8C00';
+            $color = '#FB923C';
         } else if ($this->grade == 'D') {
-            $color = '#E53935';
+            $color = '#FB7185';
         } else if ($this->grade == 'F') {
-            $color = '#B71C1C';
+            $color = '#FF5252';
         } else {
             return "";
         }
