@@ -20,7 +20,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('alert/delete/{alert_id}', [AlertController::class, 'delete']);
 
     Route::get('quant', [QuantController::class, 'index']);
-    Route::get('quant/logs', [QuantController::class, 'logs']);
+
+    Route::get('algo', [QuantController::class, 'index']);
+    Route::get('algo/logs', [QuantController::class, 'logs']);
 
     Route::get('/calendar/{journey_id}', [CalendarController::class, 'index']);
     Route::get('/calendar/{journey_id}/events', [CalendarController::class, 'events']);
