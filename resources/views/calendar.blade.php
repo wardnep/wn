@@ -21,6 +21,41 @@
             background-color: #8b0000 !important;
             border-color: #8b0000 !important;
         }
+
+        /* ชื่อวัน (Sun, Mon, ...) */
+        .fc .fc-col-header-cell-cushion {
+            color: #e5e7eb !important;
+        }
+
+        /* ตัวเลขวันที่ */
+        .fc .fc-daygrid-day-number {
+            color: #e5e7eb !important;
+        }
+
+        /* วันที่ของเดือนก่อนหน้า/ถัดไป (ให้จางกว่าวันปกติ แต่ยังอ่านออก) */
+        .fc .fc-day-other .fc-daygrid-day-number {
+            color: #9ca3af !important;
+        }
+
+        /* ไฮไลต์วันนี้ */
+        .fc .fc-day-today {
+            background-color: rgba(250, 204, 21, 0.12) !important;
+        }
+        .fc .fc-day-today .fc-daygrid-day-number {
+            color: #facc15 !important;
+            font-weight: 700;
+        }
+        .win-big {
+            background-color: #16a34a !important;
+            border-color: #16a34a !important;
+        }
+        .lose-big {
+            background-color: #dc2626 !important;
+            border-color: #dc2626 !important;
+        }
+        .fc, .fc-theme-standard td, .fc-theme-standard th, .fc-theme-standard .fc-scrollgrid {
+            border-color: #6b7280 !important;
+        }
     </style>
 @endsection
 

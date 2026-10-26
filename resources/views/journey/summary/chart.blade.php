@@ -23,9 +23,17 @@
 @section('js')
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.2/echarts.min.js" integrity="sha512-weWXHm0Ws2cZKjjwugRMnnOAx9uCP/wUVf84W7/fXQimwYUK28zPDGPprDozomQLpKv6U99xN9PI9+yLI9qxNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
+		// สีสำหรับ dark theme
+		var textColor = '#e5e7eb';
+		var mutedColor = '#9ca3af';
+		var gridColor = 'rgba(255, 255, 255, 0.15)';
+		var lineColor = '#60a5fa';
+
 		var option1 = {
+			backgroundColor: 'transparent',
 			title: {
-				text: "{{ $r }}R - {{ $items->count() }} trades"
+				text: "{{ $r }}R - {{ $items->count() }} trades",
+				textStyle: { color: textColor }
 			},
 			tooltip: {
 				trigger: 'axis',
@@ -65,11 +73,17 @@
 				boundaryGap: false,
 				axisLabel: {
 					rotate: 90,
-					interval: 0
-				}
+					interval: 0,
+					color: textColor
+				},
+				axisLine: { lineStyle: { color: mutedColor } },
+				axisTick: { lineStyle: { color: mutedColor } }
 			},
 			yAxis: {
-				type: 'value'
+				type: 'value',
+				axisLabel: { color: textColor },
+				axisLine: { show: true, lineStyle: { color: mutedColor } },
+				splitLine: { lineStyle: { color: gridColor } }
 			},
 			series: [
 				{
@@ -89,14 +103,18 @@
 							{{ $profit }}{{ !$loop->last ? ',' : '' }}
 						@endforeach
 					],
-					type: 'line'
+					type: 'line',
+					lineStyle: { color: lineColor, width: 2 },
+					itemStyle: { color: lineColor }
 				}
 			]
 		};
 
 		var option2 = {
+			backgroundColor: 'transparent',
 			title: {
-				text: "Win Rate"
+				text: "Win Rate",
+				textStyle: { color: textColor }
 			},
 			tooltip: {
 				trigger: 'axis',
@@ -136,11 +154,17 @@
 				boundaryGap: false,
 				axisLabel: {
 					rotate: 90,
-					interval: 0
-				}
+					interval: 0,
+					color: textColor
+				},
+				axisLine: { lineStyle: { color: mutedColor } },
+				axisTick: { lineStyle: { color: mutedColor } }
 			},
 			yAxis: {
-				type: 'value'
+				type: 'value',
+				axisLabel: { color: textColor },
+				axisLine: { show: true, lineStyle: { color: mutedColor } },
+				splitLine: { lineStyle: { color: gridColor } }
 			},
 			series: [
 				{
@@ -150,14 +174,18 @@
 							{{ $item }}{{ !$loop->last ? ',' : '' }}
 						@endforeach
 					],
-					type: 'line'
+					type: 'line',
+					lineStyle: { color: lineColor, width: 2 },
+					itemStyle: { color: lineColor }
 				}
 			]
 		};
 
 		var option3 = {
+			backgroundColor: 'transparent',
 			title: {
-				text: "|Win - Loss|"
+				text: "|Win - Loss|",
+				textStyle: { color: textColor }
 			},
 			tooltip: {
 				trigger: 'axis',
@@ -197,11 +225,17 @@
 				boundaryGap: false,
 				axisLabel: {
 					rotate: 90,
-					interval: 0
-				}
+					interval: 0,
+					color: textColor
+				},
+				axisLine: { lineStyle: { color: mutedColor } },
+				axisTick: { lineStyle: { color: mutedColor } }
 			},
 			yAxis: {
-				type: 'value'
+				type: 'value',
+				axisLabel: { color: textColor },
+				axisLine: { show: true, lineStyle: { color: mutedColor } },
+				splitLine: { lineStyle: { color: gridColor } }
 			},
 			series: [
 				{
@@ -211,19 +245,20 @@
 							{{ $item }}{{ !$loop->last ? ',' : '' }}
 						@endforeach
 					],
-					type: 'line'
+					type: 'line',
+					lineStyle: { color: lineColor, width: 2 },
+					itemStyle: { color: lineColor }
 				}
 			]
 		};
 
-		var myChart1 = echarts.init(document.getElementById('chart1'));
+		var myChart1 = echarts.init(document.getElementById('chart1'), 'dark');
 		myChart1.setOption(option1);
 
-		var myChart2 = echarts.init(document.getElementById('chart2'));
+		var myChart2 = echarts.init(document.getElementById('chart2'), 'dark');
 		myChart2.setOption(option2);
 
-		var myChart3 = echarts.init(document.getElementById('chart3'));
+		var myChart3 = echarts.init(document.getElementById('chart3'), 'dark');
 		myChart3.setOption(option3);
 	</script>
 @endsection
-

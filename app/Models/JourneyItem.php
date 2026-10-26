@@ -51,9 +51,9 @@ class JourneyItem extends Model
     public function getDpositionAttribute()
     {
         if ($this->position == 'BUY') {
-            $color = '#2E5E3A';
+            $color = '#4ade80';
         } else if ($this->position == 'SELL') {
-            $color = '#FF0000';
+            $color = '#ff6b6b';
         }
 
         return "<font color=\"$color\">$this->position</font>";
@@ -61,16 +61,12 @@ class JourneyItem extends Model
 
     public function getDresultAttribute()
     {
-        $color = '';
-        if ($this->result == 'WIN') {
-            $color = '#2E5E3A';
-        } else if ($this->result == 'LOSS') {
-            $color = '#FF0000';
-        } else if ($this->result == 'BE') {
-            $color = '#0000FF';
-        } else if ($this->result == 'CLOSE') {
-            $color = '#0000FF';
-        }
+        $colors = [
+            'WIN'   => '#4ADE80',   // เขียวสว่าง
+            'LOSS'  => '#ff6b6b',   // แดงสว่าง ไม่แสบตา
+            'BE'    => '#60A5FA',   // ฟ้าสว่าง
+            'CLOSE' => '#60A5FA',   // ฟ้าสว่าง
+        ];
 
         return "<font color=\"$color\">$this->result</font>";
     }
@@ -79,7 +75,7 @@ class JourneyItem extends Model
     {
         $colors = [
             'WIN'   => '#4ADE80',   // เขียวสว่าง
-            'LOSS'  => '#FF5252',   // แดงสว่าง ไม่แสบตา
+            'LOSS'  => '#ff6b6b',   // แดงสว่าง ไม่แสบตา
             'BE'    => '#60A5FA',   // ฟ้าสว่าง
             'CLOSE' => '#60A5FA',   // ฟ้าสว่าง
         ];
@@ -93,7 +89,7 @@ class JourneyItem extends Model
     {
         $colors = [
             'WIN'   => '#4ADE80',   // เขียวสว่าง
-            'LOSS'  => '#FF5252',   // แดงสว่าง ไม่แสบตา
+            'LOSS'  => '#ff6b6b',   // แดงสว่าง ไม่แสบตา
             'BE'    => '#60A5FA',   // ฟ้าสว่าง
             'CLOSE' => '#60A5FA',   // ฟ้าสว่าง
         ];
@@ -185,7 +181,7 @@ class JourneyItem extends Model
         } else if ($this->grade == 'D') {
             $color = '#FB7185';
         } else if ($this->grade == 'F') {
-            $color = '#FF5252';
+            $color = '#ff6b6b';
         } else {
             return "";
         }
