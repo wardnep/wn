@@ -43,6 +43,22 @@ const PositionSizing = () => {
 
     return (
         <div className="card card-primary card-outline">
+            {/* สีแถว OK / ไม่พอ สำหรับ dark theme (พื้นโปร่ง + ตัวหนังสือสว่าง) */}
+            <style>{`
+                .ps-ok,
+                .ps-ok > th,
+                .ps-ok > td {
+                    background-color: rgba(74, 222, 128, 0.18) !important;
+                    color: #86efac !important;
+                }
+                .ps-bad,
+                .ps-bad > th,
+                .ps-bad > td {
+                    background-color: rgba(248, 113, 113, 0.18) !important;
+                    color: #fca5a5 !important;
+                }
+            `}</style>
+
             <div className="card-header">
                 <h3 className="card-title">
                     <i className="fas fa-calculator mr-1" />
@@ -129,7 +145,7 @@ const PositionSizing = () => {
                                 </tr>
                                 {result.minLeverage && (
                                     <>
-                                        <tr className={result.exceedsMax ? 'table-danger' : 'table-success'}>
+                                        <tr className={result.exceedsMax ? 'ps-bad' : 'ps-ok'}>
                                             <th>Minimum Leverage Required</th>
                                             <td>
                                                 {result.exceedsMax
@@ -175,7 +191,7 @@ const PositionSizing = () => {
                                             const b = parseFloat(balance);
                                             const ok = b && margin <= b;
                                             return (
-                                                <tr key={lev} className={ok ? 'table-success' : ''}>
+                                                <tr key={lev} className={ok ? 'ps-ok' : ''}>
                                                     <td>{lev}x</td>
                                                     <td>${margin.toFixed(2)}</td>
                                                     <td>{ok ? '✓' : '✗'}</td>
