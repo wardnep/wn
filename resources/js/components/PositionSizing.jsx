@@ -136,7 +136,7 @@ const PositionSizing = () => {
                         <table className="table table-bordered table-sm">
                             <tbody>
                                 <tr>
-                                    <th style={{ width: '50%' }}>Position Size (XAU / oz)</th>
+                                    <th style={{ width: '50%' }}>Position Size</th>
                                     <td>{result.qty.toFixed(4)}</td>
                                 </tr>
                                 <tr>
