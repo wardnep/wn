@@ -21,8 +21,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('quant', [QuantController::class, 'index']);
 
-    Route::get('algo', [QuantController::class, 'index']);
-    Route::get('algo/logs', [QuantController::class, 'logs']);
+    Route::get('algorithmic', [QuantController::class, 'index']);
+    Route::get('algorithmic/logs', [QuantController::class, 'logs']);
 
     Route::get('/calendar/{journey_id}', [CalendarController::class, 'index']);
     Route::get('/calendar/{journey_id}/events', [CalendarController::class, 'events']);
