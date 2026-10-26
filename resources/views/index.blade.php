@@ -89,7 +89,7 @@
         <div class="menu-group">
             <a href="{{ url('journey') }}"><i class="fa fa-book" aria-hidden="true"></i> Trading Journey</a>
             <a href="{{ url('quant') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Algorithmic Trading</a>
-            <a href="{{ url('quant') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Quant Trading</a>
+            <a href="{{ url('quant') }}"><i class="fa fa-backward" aria-hidden="true"></i> Quant Trading</a>
             <a href="{{ url('alert') }}"><i class="fa fa-bell" aria-hidden="true"></i> Price Alert</a>
         </div>
         <div class="menu-group">
