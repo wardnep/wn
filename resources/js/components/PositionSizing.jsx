@@ -62,7 +62,7 @@ const PositionSizing = () => {
             <div className="card-header">
                 <h3 className="card-title">
                     <i className="fas fa-calculator mr-1" />
-                    Position Sizing — Binance Futures
+                    Position Sizing — Crypto Futures Market
                 </h3>
             </div>
 

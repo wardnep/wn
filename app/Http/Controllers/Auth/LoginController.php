@@ -48,4 +48,9 @@ class LoginController extends Controller
             'cf-turnstile-response' => ['required', new Turnstile],
         ]);
     }
+
+    protected function loggedOut(Request $request)
+    {
+        return redirect('/');
+    }
 }
