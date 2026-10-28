@@ -117,7 +117,7 @@
                                         @endphp
                                         @endif
                                         <tr>
-                                            <td>{{ $item->ddate }}</td>
+                                            <td>{!! $item->ddate !!}</td>
                                             <td>{!! $item->dposition !!}</td>
                                             <td>{!! $item->dresult_r1 !!}</td>
                                             <td>{!! $item->dgrade !!}</td>
