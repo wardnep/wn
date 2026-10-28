@@ -16,6 +16,21 @@ class JourneyItem extends Model
         return $this->belongsTo('App\Models\Journey');
     }
 
+    public function getDdateAttribute()
+    {
+        $date = $this->date;
+
+        // hash วันที่ -> hue (0-359) ได้ผลคงที่ทุกครั้ง
+        $hue = hexdec(substr(md5((string) $date), 0, 8)) % 360;
+
+        // พื้นหลังเข้ม จึงใช้ lightness สูงเพื่อให้อ่านง่าย
+        $color = "hsl({$hue}, 70%, 65%)";
+
+        return '<span style="color: ' . $color . '; font-weight: 600;">'
+            . e($date)
+            . '</span>';
+    }
+
     public function getDEntrySessionAttribute()
     {
         $color = '#CCCCCC';
