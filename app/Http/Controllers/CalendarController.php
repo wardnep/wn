@@ -15,7 +15,7 @@ class CalendarController extends Controller
     public function index($journey_id)
     {
         $journey = Journey::find($journey_id);
-        $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
+        $items = JourneyItem::where('journey_id', $journey_id)->get();
 
         $total = 0;
         $rr = $journey->rr;
@@ -57,7 +57,7 @@ class CalendarController extends Controller
     public function events($journey_id)
     {
         $journey = Journey::find($journey_id);
-        $items = JourneyItem::where('journey_id', $journey_id)->groupBy('date')->get();
+        $items = JourneyItem::where('journey_id', $journey_id)->get();
 
         $total = 0;
         $datas = [];
