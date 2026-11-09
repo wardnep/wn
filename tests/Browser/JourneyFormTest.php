@@ -27,7 +27,6 @@ class JourneyFormTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $journey) {
             $browser->loginAs($user)
                 ->visit('/journey/'.$journey->id)
-                ->storeSource('journey-form-page')
                 ->assertPathIs('/journey/'.$journey->id)
                 ->assertPresent('input[name="date"]')
                 ->type('input[name="date"]', '09 Nov 2026')

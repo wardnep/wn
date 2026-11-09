@@ -1,6 +1,20 @@
-@servers(['prod' => ['user01@athikit -p14321']])
+@servers(['prod' => ['user01@athikit -p14321'], 'local' => '127.0.0.1'])
 
-@task('deploy', ['on' => 'prod'])
+@setup
+    $projectPath = getcwd();
+@endsetup
+
+@task('test', ['on' => 'local'])
+    cd {{ $projectPath }}
+    php artisan test
+@endtask
+
+@story('deploy')
+    test
+    deploy-release
+@endstory
+
+@task('deploy-release', ['on' => 'prod'])
 	cd /var/www/wn
 	release=$(date +%Y%m%d%H%M%S)
 	GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_deploy -o StrictHostKeyChecking=no" \
