@@ -23,7 +23,7 @@ class JourneyController extends Controller
             if ($select_journey) {
                 $select_journey_id = $select_journey->id;
             } else {
-                $select_journey_id = Journey::latest()->first()->id;
+                $select_journey_id = Journey::latest()->first() ? Journey::latest()->first()->id : 0;
             }
         }
 

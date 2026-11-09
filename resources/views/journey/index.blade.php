@@ -18,20 +18,24 @@
                                 @endforeach
                             </select>
                         </form>
-                        @include('journey.summary.snr')
+                        @if ($select_journey)
+                            @include('journey.summary.snr')
+                        @endif
                     </div>
 
-                    <div class="col-xs-12 col-md-4" style="margin-top: 15px;">
-                        <form id="note_from" method="POST" action="{{ url('journey/note') }}">
-                            @csrf
-                            <input type="hidden" name="journey_id" value="{{ $select_journey->id }}" />
-                            <textarea class="form-control" name="note" rows="8">{{ $select_journey->note }}</textarea>
-                        </form>
-                        <button type="button" class="btn btn-primary btn-block" style="margin-top: 8px;"
-                            onClick="javascript: document.getElementById('note_from').submit();">
-                            <span class="fas fa-save"></span> Save Note
-                        </button>
-                    </div>
+                    @if ($select_journey)
+                        <div class="col-xs-12 col-md-4" style="margin-top: 15px;">
+                            <form id="note_from" method="POST" action="{{ url('journey/note') }}">
+                                @csrf
+                                <input type="hidden" name="journey_id" value="{{ $select_journey->id }}" />
+                                <textarea class="form-control" name="note" rows="8">{{ $select_journey->note }}</textarea>
+                            </form>
+                            <button type="button" class="btn btn-primary btn-block" style="margin-top: 8px;"
+                                onClick="javascript: document.getElementById('note_from').submit();">
+                                <span class="fas fa-save"></span> Save Note
+                            </button>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="row" style="margin-top: 15px;">
