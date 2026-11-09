@@ -57,21 +57,18 @@ class CalendarController extends Controller
     public function events($journey_id)
     {
         $journey = Journey::find($journey_id);
-        $items = JourneyItem::where('journey_id', $journey_id)->get();
+        $dates = JourneyItem::where('journey_id', $journey_id)->distinct('date')->pluck('date');
 
-        $total = 0;
         $datas = [];
-        foreach ($items as $item) {
-            $win = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
-            $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
+        foreach ($dates as $date) {
+            $win = JourneyItem::where('journey_id', $journey_id)->where('date', $date)->where('result_r1', 'WIN')->count();
+            $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $date)->where('result_r1', 'LOSS')->count();
             $r = ($win * $journey->rr) - ($loss * 1);
-
-            // return response()->json([$r, $win, $journey->rr, $loss]);
 
             $total_trade = $win + $loss;
 
             if ($r) {
-                $date = Carbon::createFromFormat('d M Y', $item->date)
+                $date = Carbon::createFromFormat('d M Y', $date)
                     ->format('Y-m-d');
 
                 if ($r > 1) {
@@ -84,13 +81,17 @@ class CalendarController extends Controller
                     $class = 'lose-trade';
                 }
 
+                if ($total_trade > 1) {
+                    $title = "{$r}R ({$total_trade} trades)";
+                } else {
+                    $title = "{$r}R";
+                }
+
                 $datas[] = [
-                    'title' => "{$r}R",
+                    'title' => $title,
                     'start' => $date,
                     'classNames' => $class
                 ];
-
-                $total += $r;
             }
         }
 
