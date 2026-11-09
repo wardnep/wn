@@ -53,38 +53,39 @@
 
                         {{-- Add / Edit item form (kept inside table-responsive so its row scrolls too) --}}
                         <div class="table-responsive">
+                            <form id="journey-item-form" method="POST" action="{{ url('journey') }}" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="select_journey_id" value="{{ $select_journey ? $select_journey->id : 0 }}" />
+                                <input type="hidden" name="edit_journey_item_id" value="{{ $edit_journey_item ? $edit_journey_item->id : 0  }}" />
+                                <input type="hidden" name="page" value="{{ $journey_items->currentPage() }}" />
+                            </form>
                             <table class="table table-bordered table-striped" style="width: 100%; min-width: 700px;">
                                 <tbody>
-                                    <form method="POST" action="{{ url('journey') }}" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="hidden" name="select_journey_id" value="{{ $select_journey ? $select_journey->id : 0 }}" />
-                                        <input type="hidden" name="edit_journey_item_id" value="{{ $edit_journey_item ? $edit_journey_item->id : 0  }}" />
-                                        <input type="hidden" name="page" value="{{ $journey_items->currentPage() }}" />
                                         <tr>
                                             <td style="min-width: 130px;">
-                                                <input type="text" name="date" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->date : $default_date }}" />
+                                                <input type="text" name="date" form="journey-item-form" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->date : $default_date }}" />
                                             </td>
                                             <td width="100px">
-                                                <select class="form-control" name="position">
+                                                <select class="form-control" name="position" form="journey-item-form">
                                                     <option {{ $edit_journey_item && $edit_journey_item->position == 'BUY' ? 'selected' : '' }}>BUY</option>
                                                     <option {{ $edit_journey_item && $edit_journey_item->position == 'SELL' ? 'selected' : '' }}>SELL</option>
                                                 </select>
                                             </td>
                                             <td width="100px">
-                                                <select class="form-control" name="result_r1">
+                                                <select class="form-control" name="result_r1" form="journey-item-form">
                                                     <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'WIN' ? 'selected' : '' }}>WIN</option>
                                                     <option {{ $edit_journey_item && $edit_journey_item->result_r1 == 'LOSS' ? 'selected' : '' }}>LOSS</option>
                                                 </select>
                                             </td>
                                             <td colspan="2">
-                                                <input type="text" name="grade" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->grade : '' }}" />
+                                                <input type="text" name="grade" form="journey-item-form" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->grade : '' }}" />
                                             </td>
                                             <td colspan="2">
                                                 {{-- <input type="file" name="image" /> --}}
-                                                <input type="text" name="image" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->image : '' }}" />
+                                                <input type="text" name="image" form="journey-item-form" class="form-control" value="{{ $edit_journey_item ? $edit_journey_item->image : '' }}" />
                                             </td>
                                             <td style="white-space: nowrap;">
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" form="journey-item-form" class="btn btn-primary">
                                                     <span class="fas fa-save"></span>
                                                 </button>
                                                 @if ($edit_journey_item)
@@ -96,11 +97,9 @@
                                         </tr>
                                         <tr>
                                             <td colspan="6">
-                                                <textarea class="form-control" name="note" rows="3">{{ $edit_journey_item ? $edit_journey_item->note : '' }}</textarea>
+                                                <textarea class="form-control" name="note" form="journey-item-form" rows="3">{{ $edit_journey_item ? $edit_journey_item->note : '' }}</textarea>
                                             </td>
                                         </tr>
-                                    </form>
-
                                     <tr>
                                         <td width="150px"><b>Date</b></td>
                                         <td><b>Position</b></td>
