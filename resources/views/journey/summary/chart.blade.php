@@ -10,9 +10,9 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-						<div id="chart1" style="width: 1500px; height: 400px;"></div>
-						<div id="chart2" style="width: 1500px; height: 400px;"></div>
-						<div id="chart3" style="width: 1500px; height: 400px;"></div>
+						<div id="chart1" style="width: 100%; height: 400px;"></div>
+						<div id="chart2" style="width: 100%; height: 400px;"></div>
+						<div id="chart3" style="width: 100%; height: 400px;"></div>
 					</div>
 				</div>
 			</div>
@@ -43,8 +43,8 @@
 				}
 			},
 			grid: {
-				left: '1%',
-				right: '1%',
+				left: '2%',
+				right: '4%',
 				bottom: '3%',
 				containLabel: true
 			},
@@ -124,8 +124,8 @@
 				}
 			},
 			grid: {
-				left: '1%',
-				right: '1%',
+				left: '2%',
+				right: '4%',
 				bottom: '3%',
 				containLabel: true
 			},
@@ -195,8 +195,8 @@
 				}
 			},
 			grid: {
-				left: '1%',
-				right: '1%',
+				left: '2%',
+				right: '4%',
 				bottom: '3%',
 				containLabel: true
 			},
@@ -260,5 +260,12 @@
 
 		var myChart3 = echarts.init(document.getElementById('chart3'), 'dark');
 		myChart3.setOption(option3);
+
+		// ปรับขนาดกราฟตามหน้าต่าง
+		window.addEventListener('resize', function () {
+			myChart1.resize();
+			myChart2.resize();
+			myChart3.resize();
+		});
 	</script>
 @endsection
