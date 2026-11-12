@@ -129,7 +129,7 @@
                                                     <img src="{{ $item->dimage }}" width="50px" title="{{ $item->note }}" />
                                                 </a>
                                             </td>
-                                            <td>{!! $item->note !!}</td>
+                                            <td>{!! nl2br(e($item->note)) !!}</td>
                                             <td style="white-space: nowrap;">
                                                 @if (!$is_edit)
                                                     <a href="{{ url('journey/' . $select_journey->id . "/" . $item->id . '?page=' . $journey_items->currentPage()) }}" class="btn btn-success">
