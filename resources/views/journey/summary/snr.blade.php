@@ -115,4 +115,8 @@ use App\Models\JourneyItem;
             <i class="fas fa-chart-line"></i>
         </a>
     </div>
+    <div class="col-md-12">
+        <br />
+        <strong><font color="#ff6b6b">*** Execution Performance NOT Trading Performance ***</font></strong>
+    </div>
 </div>

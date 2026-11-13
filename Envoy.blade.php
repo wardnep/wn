@@ -10,7 +10,7 @@
 @endtask
 
 @story('deploy')
-    test
+    {{-- test --}}
     deploy-release
 @endstory
 
