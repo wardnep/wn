@@ -18,6 +18,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('alert/{edit_price_level_id?}', [AlertController::class, 'index']);
     Route::post('alert', [AlertController::class, 'storeOrUpdate']);
     Route::get('alert/delete/{alert_id}', [AlertController::class, 'delete']);
+    Route::post('alert/time', [AlertController::class, 'storeTimeAlert']);
+    Route::get('alert/time/delete/{alert_id}', [AlertController::class, 'deleteTimeAlert']);
 
     Route::get('quant', [QuantController::class, 'index']);
 
