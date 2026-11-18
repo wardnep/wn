@@ -92,11 +92,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="start_time">ตั้งแต่</label>
-                        <input id="start_time" type="time" name="start_time" value="{{ old('start_time') }}" class="form-control" required>
+                        <input id="start_time" type="time" lang="en-GB" name="start_time" value="{{ old('start_time') }}" class="form-control" required>
                     </div>
                     <div class="form-group" style="margin-left: 8px">
                         <label for="end_time">ถึง</label>
-                        <input id="end_time" type="time" name="end_time" value="{{ old('end_time') }}" class="form-control" required>
+                        <input id="end_time" type="time" lang="en-GB" name="end_time" value="{{ old('end_time') }}" class="form-control" required>
                     </div>
                     <div class="form-group" style="margin-left: 8px">
                         <label for="time_message">ข้อความ</label>
