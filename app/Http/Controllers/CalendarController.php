@@ -37,6 +37,7 @@ class CalendarController extends Controller
         $end = $request->get('end');
 
         $items = JourneyItem::where('journey_id', $journey_id)
+            ->select('date')
             ->groupBy('date')
             ->get();
 
