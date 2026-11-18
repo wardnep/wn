@@ -87,16 +87,16 @@
         <div class="box box-info">
             <div class="box-header"><h3 class="box-title">Time Alerts (เวลาประเทศไทย)</h3></div>
             <div class="box-body">
-                <p>เตือนก่อนแท่ง 5m เปิดทุกนาที :04, :09, :14, ... ภายในช่วงเวลาที่กำหนด (เวลาไทย)</p>
+                <p>เตือนก่อนแท่ง 5m เปิดทุกนาที :04, :09, :14, ... ภายในช่วงเวลาที่กำหนด (เวลาไทย) กรอกเวลาแบบ 24 ชั่วโมง เช่น 19:00</p>
                 <form id="time-alert-form" method="POST" action="{{ url('alert/time') }}" class="form-inline">
                     @csrf
                     <div class="form-group">
                         <label for="start_time">ตั้งแต่</label>
-                        <input id="start_time" type="time" lang="en-GB" name="start_time" value="{{ old('start_time') }}" class="form-control" required>
+                        <input id="start_time" type="text" name="start_time" value="{{ old('start_time') }}" class="form-control" placeholder="HH:MM" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" title="กรอกเวลาแบบ 24 ชั่วโมง เช่น 19:00" required>
                     </div>
                     <div class="form-group" style="margin-left: 8px">
                         <label for="end_time">ถึง</label>
-                        <input id="end_time" type="time" lang="en-GB" name="end_time" value="{{ old('end_time') }}" class="form-control" required>
+                        <input id="end_time" type="text" name="end_time" value="{{ old('end_time') }}" class="form-control" placeholder="HH:MM" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" title="กรอกเวลาแบบ 24 ชั่วโมง เช่น 19:00" required>
                     </div>
                     <div class="form-group" style="margin-left: 8px">
                         <label for="time_message">ข้อความ</label>
