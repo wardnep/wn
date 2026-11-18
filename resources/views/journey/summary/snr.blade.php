@@ -117,7 +117,7 @@ use App\Models\JourneyItem;
     </div>
     <div class="col-md-12">
         <br />
-        <strong><font color="#ff6b6b">*** Execution Performance NOT Trading Performance ***</font></strong><br
+        <strong><font color="#ff6b6b">*** Execution Performance NOT Trading Performance ***</font></strong><br />
         <strong><font color="#ff6b6b">*** Drawdown is just an operating expense ***</font></strong>
     </div>
 </div>
