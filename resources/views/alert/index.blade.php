@@ -1,7 +1,7 @@
 @extends('_layouts.app')
 
 @section('title')
-    Price Alert - {{ $price_levels->count() }}
+    WN Alert
 @endsection
 
 @section('content')
