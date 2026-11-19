@@ -20,13 +20,13 @@
 	GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_deploy -o StrictHostKeyChecking=no" \
 	git clone git@github.com:wardnep/wn.git $release
 	cd $release
-	composer install --quiet
+	php8.3 "$(command -v composer)" install --quiet --no-interaction --prefer-dist
 	ln -s ../env .env
 	rm -rf storage
 	ln -s ../storage storage
-	php artisan migrate --no-interaction
-	php artisan optimize
-	php artisan config:clear
+	php8.3 artisan migrate --no-interaction
+	php8.3 artisan optimize
+	php8.3 artisan config:clear
   	cd ..
 	ln -sfn $release current
 	find . -maxdepth 1 -name "2*" | sort | head -n -2 | xargs rm -Rf
