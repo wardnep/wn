@@ -87,41 +87,38 @@
         <div class="box box-info">
             <div class="box-header"><h3 class="box-title">Time Alerts (เวลาประเทศไทย)</h3></div>
             <div class="box-body">
-                <p>เตือนก่อนแท่ง 5m เปิดทุกนาที :04, :09, :14, ... ภายในช่วงเวลาที่กำหนด (เวลาไทย) กรอกเวลาแบบ 24 ชั่วโมง เช่น 19:00</p>
-                <form id="time-alert-form" method="POST" action="{{ url('alert/time') }}" class="form-inline">
+                <p>เมื่อเปิดใช้งาน ระบบจะแจ้งเตือนเวลา :04:30, :09:30, :14:30, ... ซึ่งเป็น 30 วินาทีก่อนแท่ง 5m ปิด</p>
+                <form id="time-alert-toggle-form" method="POST" action="{{ url('alert/time/toggle') }}">
                     @csrf
-                    <div class="form-group">
-                        <label for="start_time">ตั้งแต่</label>
-                        <input id="start_time" type="text" name="start_time" value="{{ old('start_time') }}" class="form-control" placeholder="HH:MM" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" title="กรอกเวลาแบบ 24 ชั่วโมง เช่น 19:00" required>
-                    </div>
-                    <div class="form-group" style="margin-left: 8px">
-                        <label for="end_time">ถึง</label>
-                        <input id="end_time" type="text" name="end_time" value="{{ old('end_time') }}" class="form-control" placeholder="HH:MM" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" title="กรอกเวลาแบบ 24 ชั่วโมง เช่น 19:00" required>
-                    </div>
-                    <div class="form-group" style="margin-left: 8px">
-                        <label for="time_message">ข้อความ</label>
-                        <input id="time_message" type="text" name="time_message" value="{{ old('time_message') }}" class="form-control" placeholder="ตรวจสอบ key level">
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="margin-left: 8px">เพิ่มเวลา</button>
+                    <input type="hidden" name="enabled" id="time-alert-enabled" value="{{ $time_alert_enabled ? 1 : 0 }}">
+                    <label class="time-alert-toggle">
+                        <input type="checkbox" id="time-alert-switch" role="switch" {{ $time_alert_enabled ? 'checked' : '' }} aria-label="เปิดหรือปิด Time Alert">
+                        <span class="time-alert-slider"></span>
+                    </label>
+                    <strong id="time-alert-status">{{ $time_alert_enabled ? 'เปิดอยู่' : 'ปิดอยู่' }}</strong>
                 </form>
-                @if ($errors->has('start_time') || $errors->has('end_time') || $errors->has('time_message'))
-                    <div class="text-danger">{{ $errors->first('start_time') ?: ($errors->first('end_time') ?: $errors->first('time_message')) }}</div>
-                @endif
-                <table class="table table-bordered table-striped" style="margin-top: 15px">
-                    <thead><tr><th>ช่วงเวลา</th><th>ข้อความ</th><th></th></tr></thead>
-                    <tbody>
-                        @forelse ($time_alerts as $time_alert)
-                            <tr>
-                                <td>{{ $time_alert->alert_time }}–{{ $time_alert->end_time }}</td>
-                                <td>{{ $time_alert->message }}</td>
-                                <td><a href="{{ url('alert/time/delete/' . $time_alert->id) }}" class="btn btn-danger" onclick="return confirm('Delete this time alert?')"><span class="fas fa-trash"></span></a></td>
-                            </tr>
-                        @empty
-                            <tr><td colspan="3">ยังไม่มี time alert</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
             </div>
         </div>
     </section>
+@endsection
+
+@section('css')
+    <style>
+        .time-alert-toggle { display: inline-block; height: 28px; margin: 0 8px 0 0; position: relative; vertical-align: middle; width: 50px; }
+        .time-alert-toggle input { height: 0; opacity: 0; width: 0; }
+        .time-alert-slider { background: #aaa; border-radius: 28px; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .2s; }
+        .time-alert-slider:before { background: #fff; border-radius: 50%; bottom: 4px; content: ''; height: 20px; left: 4px; position: absolute; transition: .2s; width: 20px; }
+        .time-alert-toggle input:checked + .time-alert-slider { background: #28a745; }
+        .time-alert-toggle input:checked + .time-alert-slider:before { transform: translateX(22px); }
+    </style>
+@endsection
+
+@section('js')
+    <script>
+        document.getElementById('time-alert-switch').addEventListener('change', function () {
+            document.getElementById('time-alert-enabled').value = this.checked ? '1' : '0';
+            document.getElementById('time-alert-status').textContent = this.checked ? 'กำลังเปิด...' : 'กำลังปิด...';
+            document.getElementById('time-alert-toggle-form').submit();
+        });
+    </script>
 @endsection

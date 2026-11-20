@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\PriceLevel;
-use App\Models\TimeAlert;
+use App\Models\TimeAlertSetting;
 
 class AlertController extends Controller
 {
@@ -19,37 +19,17 @@ class AlertController extends Controller
             $edit_price_level = PriceLevel::find($edit_id);
         }
 
-        $time_alerts = TimeAlert::orderBy('alert_time')->get();
-        return view('alert.index', compact('price_levels', 'edit_price_level', 'time_alerts'));
+        $time_alert_enabled = TimeAlertSetting::firstOrCreate(['id' => 1], ['enabled' => false])->enabled;
+        return view('alert.index', compact('price_levels', 'edit_price_level', 'time_alert_enabled'));
     }
 
-    public function storeTimeAlert(Request $request)
+    public function toggleTimeAlert(Request $request)
     {
-        $data = $request->validate([
-            'start_time' => ['required', 'date_format:H:i'],
-            'end_time' => ['required', 'date_format:H:i'],
-            'time_message' => ['nullable', 'string', 'max:255'],
-        ]);
+        $data = $request->validate(['enabled' => ['required', 'boolean']]);
+        $setting = TimeAlertSetting::firstOrCreate(['id' => 1], ['enabled' => false]);
+        $setting->enabled = $data['enabled'];
+        $setting->save();
 
-        if ($data['end_time'] <= $data['start_time']) {
-            return redirect()->back()->withInput()->withErrors([
-                'end_time' => 'เวลาสิ้นสุดต้องอยู่หลังเวลาเริ่มต้นในวันเดียวกัน',
-            ]);
-        }
-
-        TimeAlert::create([
-            'alert_time' => $data['start_time'],
-            'end_time' => $data['end_time'],
-            'message' => $data['time_message'] ?? '',
-            'active' => true,
-        ]);
-
-        return redirect('alert');
-    }
-
-    public function deleteTimeAlert($alert_id)
-    {
-        TimeAlert::destroy($alert_id);
         return redirect()->back();
     }
 
