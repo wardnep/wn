@@ -16,16 +16,10 @@ class CalendarController extends Controller
     {
         $journey = Journey::find($journey_id);
         $items = JourneyItem::where('journey_id', $journey_id)->get();
-
-        $total = 0;
         $rr = $journey->rr;
-        foreach ($items as $item) {
-            $win = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'WIN')->count();
-            $loss = JourneyItem::where('journey_id', $journey_id)->where('date', $item->date)->where('result_r1', 'LOSS')->count();
-            $r = ($win * $rr) - ($loss * 1);
-
-            $total += $r;
-        }
+        $win = $items->where('result_r1', 'WIN')->count();
+        $loss = $items->where('result_r1', 'LOSS')->count();
+        $total = ($win * $rr) - $loss;
 
         return view('calendar', compact('journey_id', 'total', 'rr'));
     }

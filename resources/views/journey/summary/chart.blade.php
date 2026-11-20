@@ -95,8 +95,8 @@
 						@foreach ($items as $item)
 						@php
 							if ($item->result_r1 === 'WIN') {
-								$profit += 2;
-							} else {
+								$profit += $journey->rr;
+							} elseif ($item->result_r1 === 'LOSS') {
 								$profit -= 1;
 							}
 						@endphp
