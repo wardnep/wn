@@ -10,11 +10,13 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\PositionSizingController;
+use App\Http\Controllers\JourneyAnalysisController;
 use App\Http\Controllers\CVM\CvmController;
 
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('journey-analysis', [JourneyAnalysisController::class, 'index']);
     Route::get('alert/{edit_price_level_id?}', [AlertController::class, 'index']);
     Route::post('alert', [AlertController::class, 'storeOrUpdate']);
     Route::get('alert/delete/{alert_id}', [AlertController::class, 'delete']);
