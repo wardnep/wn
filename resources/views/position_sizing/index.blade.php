@@ -8,11 +8,7 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-body">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                        <div id="position-sizing"></div>
-                    </div>
-                </div>
+                <div id="position-sizing"></div>
             </div>
         </div>
     </section>
