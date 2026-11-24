@@ -55,6 +55,12 @@
                 <a class="rounded-md px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white" href="{{ url('quant') }}">Quant</a>
                 <a class="rounded-md px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white" href="{{ url('alert') }}">Alerts</a>
                 <a class="rounded-md px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white" href="{{ url('position_sizing') }}">Position sizing</a>
+                @auth
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="rounded-md px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">Logout</button>
+                    </form>
+                @endauth
             </nav>
         </div>
     </header>
