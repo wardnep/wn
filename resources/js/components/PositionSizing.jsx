@@ -231,7 +231,6 @@ const PositionSizing = () => {
                 ) : (
                     <div className="ps-empty">กรอก Risk, Entry Price และ Stop Loss เพื่อดูขนาด Position และ Margin ที่ต้องใช้</div>
                 )}
-                <small className="mt-3 block text-muted">* claude.ai (Sonnet 5)</small>
                 </div>
             </div>
         </div>

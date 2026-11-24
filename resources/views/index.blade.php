@@ -20,6 +20,7 @@
             <a class="flex min-h-12 items-center justify-center gap-3 rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-gray-100 no-underline transition hover:border-blue-500 hover:bg-gray-800 hover:text-blue-300" href="{{ url('position_sizing') }}"><i class="fa fa-asterisk text-blue-400" aria-hidden="true"></i> Position Sizing</a>
             <a class="flex min-h-12 items-center justify-center gap-3 rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-gray-100 no-underline transition hover:border-blue-500 hover:bg-gray-800 hover:text-blue-300" target="_blank" rel="noopener noreferrer" href="https://github.com/wardnep"><i class="fa fa-rocket text-blue-400" aria-hidden="true"></i> Github</a>
         </div>
+        <p class="mt-6 text-sm text-gray-500">* OpenAI GPT-6</p>
     </nav>
 
     <!-- Google tag (gtag.js) -->
