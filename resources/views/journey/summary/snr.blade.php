@@ -40,7 +40,7 @@ use App\Models\JourneyItem;
         // RF
         //
         if ($item->result_r1 === 'WIN') {
-            $gross_profit += 1.5;
+            $gross_profit += $select_journey->rr;
         } else {
             $gross_loss += 1;
         }
