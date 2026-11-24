@@ -76,48 +76,27 @@ use App\Models\JourneyItem;
         $obd = 0;
     }
 @endphp
-<div class="row">
-    <div class="col-md-2">
-        Total <b>{{ $total }}</b>
-    </div>
-    <div class="col-md-2">
-        Win Rate <b>{{ number_format($win_rate * 100, 2) }}%</b>
-    </div>
-    <div class="col-md-2">
-        Losing Streak <b>{{ $max_losing_streak }}</b>
-    </div>
-    <div class="col-md-3">
-        Win <b>{{ $win }}</b> Loss <b>{{ $loss }}</b>
-    </div>
-    <div class="col-md-2">
-        Orders/Day <b>{{ $obd }}</b>
-    </div>
-    <div class="col-md-2">
-        Expectancy <b>{{ number_format($expectancy, 2) }}</b>
-    </div>
-    <div class="col-md-2">
-        DD <b>{{ $dd }}R</b>
-    </div>
-    <div class="col-md-2">
-        Profit Factor <b>{{ number_format($pf, 2) }}</b>
-    </div>
-    <div class="col-md-3">
-        Recovery Factor <b>{{ number_format($rf, 2) }}</b>
-    </div>
-    <div class="col-md-2">
-        Total R <b>{{ $total * $expectancy }}</b>
-    </div>
-    <div class="col-md-12">
-        <a href="{{ url('calendar/'.$select_journey->id) }}" class="btn btn-info" target="_blank">
+<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Total <b class="ml-1 text-white">{{ $total }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Win Rate <b class="ml-1 text-white">{{ number_format($win_rate * 100, 2) }}%</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Losing Streak <b class="ml-1 text-white">{{ $max_losing_streak }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Win <b class="text-emerald-400">{{ $win }}</b> <span class="text-gray-500">/</span> Loss <b class="text-rose-400">{{ $loss }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Orders/Day <b class="ml-1 text-white">{{ $obd }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Expectancy <b class="ml-1 text-white">{{ number_format($expectancy, 2) }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">DD <b class="ml-1 text-white">{{ $dd }}R</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Profit Factor <b class="ml-1 text-white">{{ number_format($pf, 2) }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Recovery Factor <b class="ml-1 text-white">{{ number_format($rf, 2) }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Total R <b class="ml-1 text-white">{{ $total * $expectancy }}</b></div>
+</div>
+<div class="mt-4 flex gap-2">
+        <a href="{{ url('calendar/'.$select_journey->id) }}" class="inline-flex items-center rounded-md bg-sky-600 px-3 py-2 text-white hover:bg-sky-500" target="_blank" aria-label="Calendar">
             <span class="fas fa-calendar" />
         </a>
-        <a href="{{ url('journey/chart/'.$select_journey->id) }}" class="btn btn-warning" target="_blank">
+        <a href="{{ url('journey/chart/'.$select_journey->id) }}" class="inline-flex items-center rounded-md bg-amber-600 px-3 py-2 text-white hover:bg-amber-500" target="_blank" aria-label="Performance charts">
             <i class="fas fa-chart-line"></i>
         </a>
-    </div>
-    <div class="col-md-12">
-        <br />
-        <strong><font color="#ff6b6b">*** Execution Performance NOT Trading Performance ***</font></strong><br />
-        <strong><font color="#ff6b6b">*** Drawdown is just an operating expense ***</font></strong>
-    </div>
+</div>
+<div class="mt-4 space-y-1 text-sm font-semibold text-rose-400">
+    <p>*** Execution Performance NOT Trading Performance ***</p>
+    <p>*** Drawdown is just an operating expense ***</p>
 </div>
