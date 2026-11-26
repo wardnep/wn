@@ -7,7 +7,6 @@
         <div class="box box-primary">
             <div class="box-header with-border flex items-center justify-between gap-3">
                 <h3 class="box-title">A+ Setups — {{ $journey->name }}</h3>
-                <a href="{{ url('journey?select_journey_id=' . $journey->id) }}" class="btn btn-default">กลับไป Journey</a>
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped">
@@ -23,10 +22,12 @@
                             <tr>
                                 <td style="white-space: nowrap;">{{ $item->date }}</td>
                                 <td style="white-space: nowrap;">
-                                    {{ $item->result_r1 ?: '—' }}
+                                    <span class="{{ $item->result_r1 === 'WIN' || (is_numeric($item->result_r1) && (float) $item->result_r1 > 0) ? 'text-emerald-400' : ($item->result_r1 === 'LOSS' || (is_numeric($item->result_r1) && (float) $item->result_r1 < 0) ? 'text-rose-400' : '') }}">
+                                        {{ $item->result_r1 ?: '—' }}
+                                    </span>
                                     @if (is_numeric($item->result_r1)) ({{ number_format((float) $item->result_r1, 2) }}R) @endif
                                     @if ($item->result_r2 !== null && $item->result_r2 !== '' && $item->result_r2 != 0)
-                                        <br>{{ $item->result_r2 }}
+                                        <br><span class="{{ $item->result_r2 === 'WIN' || (is_numeric($item->result_r2) && (float) $item->result_r2 > 0) ? 'text-emerald-400' : ($item->result_r2 === 'LOSS' || (is_numeric($item->result_r2) && (float) $item->result_r2 < 0) ? 'text-rose-400' : '') }}">{{ $item->result_r2 }}</span>
                                         @if (is_numeric($item->result_r2)) ({{ number_format((float) $item->result_r2, 2) }}R) @endif
                                     @endif
                                 </td>

@@ -75,17 +75,41 @@ use App\Models\JourneyItem;
     } else {
         $obd = 0;
     }
+
+    // Color metrics from red (weak) through yellow to green (strong).
+    $metricColor = function ($value, $good, $bad) {
+        if ($good == $bad) {
+            $score = 0;
+        } elseif ($good > $bad) {
+            $score = ($value - $bad) / ($good - $bad);
+        } else {
+            $score = ($bad - $value) / ($bad - $good);
+        }
+        $score = max(0, min(1, $score));
+        $red = [248, 113, 113];
+        $yellow = [250, 204, 21];
+        $green = [74, 222, 128];
+        $from = $score < 0.5 ? $red : $yellow;
+        $to = $score < 0.5 ? $yellow : $green;
+        $ratio = ($score < 0.5 ? $score : $score - 0.5) * 2;
+        $rgb = [];
+        for ($i = 0; $i < 3; $i++) {
+            $rgb[] = (int) round($from[$i] + ($to[$i] - $from[$i]) * $ratio);
+        }
+
+        return sprintf('#%02x%02x%02x', $rgb[0], $rgb[1], $rgb[2]);
+    };
 @endphp
 <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
     <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Total <b class="ml-1 text-white">{{ $total }}</b></div>
-    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Win Rate <b class="ml-1 text-white">{{ number_format($win_rate * 100, 2) }}%</b></div>
-    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Losing Streak <b class="ml-1 text-white">{{ $max_losing_streak }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Win Rate <b class="ml-1" style="color: {{ $metricColor($win_rate * 100, 60, 30) }}">{{ number_format($win_rate * 100, 2) }}%</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Losing Streak <b class="ml-1" style="color: {{ $metricColor($max_losing_streak, 1, 6) }}">{{ $max_losing_streak }}</b></div>
     <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Win <b class="text-emerald-400">{{ $win }}</b> <span class="text-gray-500">/</span> Loss <b class="text-rose-400">{{ $loss }}</b></div>
     <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Orders/Day <b class="ml-1 text-white">{{ $obd }}</b></div>
-    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Expectancy <b class="ml-1 text-white">{{ number_format($expectancy, 2) }}</b></div>
-    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">DD <b class="ml-1 text-white">{{ $dd }}R</b></div>
-    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Profit Factor <b class="ml-1 text-white">{{ number_format($pf, 2) }}</b></div>
-    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Recovery Factor <b class="ml-1 text-white">{{ number_format($rf, 2) }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Expectancy <b class="ml-1" style="color: {{ $metricColor($expectancy, 1, 0) }}">{{ number_format($expectancy, 2) }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">DD <b class="ml-1" style="color: {{ $metricColor($dd, 0, 10) }}">{{ $dd }}R</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Profit Factor <b class="ml-1" style="color: {{ $metricColor($pf, 2.5, 0.8) }}">{{ number_format($pf, 2) }}</b></div>
+    <div class="rounded-lg border border-gray-700 bg-gray-800 p-3 whitespace-nowrap">Recovery Factor <b class="ml-1" style="color: {{ $metricColor($rf, 3, 0) }}">{{ number_format($rf, 2) }}</b></div>
     <div class="rounded-lg border border-gray-700 bg-gray-800 p-3">Total R <b class="ml-1 text-white">{{ $total * $expectancy }}</b></div>
 </div>
 <div class="mt-4 flex gap-2">
