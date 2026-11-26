@@ -158,7 +158,7 @@ class JourneyController extends Controller
             }
 
             $resolved_count = $win_count + $loss_count;
-            $win_loss[] = ($win_count * $journey->rr) - $loss_count;
+            $win_loss[] = $win_count - $loss_count;
             $win_rate[] = $resolved_count ? ($win_count / $resolved_count) * 100 : 0;
         }
 
