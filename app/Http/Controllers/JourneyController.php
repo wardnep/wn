@@ -165,6 +165,17 @@ class JourneyController extends Controller
         return view('journey.summary.chart', compact('journey', 'items', 'r', 'win_loss', 'win_rate'));
     }
 
+    public function aPlus($journey_id)
+    {
+        $journey = Journey::withTrashed()->findOrFail($journey_id);
+        $items = JourneyItem::where('journey_id', $journey_id)
+            ->where('grade', 'A+')
+            ->orderByDesc('id')
+            ->paginate(1);
+
+        return view('journey.a-plus', compact('journey', 'items'));
+    }
+
     public function default($journey_id)
     {
         Journey::query()->update(['default' => false]);
@@ -178,13 +189,14 @@ class JourneyController extends Controller
 
     public function image($journey_id, $journey_item_id) {
         $item = JourneyItem::find($journey_item_id);
-        $prev_item = JourneyItem::where('journey_id', $journey_id)->where('id', '<', $journey_item_id)->first();
-        $next_item = JourneyItem::where('journey_id', $journey_id)->where('id', '>', $journey_item_id)->first();
+        $journey = Journey::withTrashed()->findOrFail($journey_id);
+        $prev_item = JourneyItem::where('journey_id', $journey_id)->where('id', '<', $journey_item_id)->orderByDesc('id')->first();
+        $next_item = JourneyItem::where('journey_id', $journey_id)->where('id', '>', $journey_item_id)->orderBy('id')->first();
 
         $total = JourneyItem::where('journey_id', $journey_id)->count();
-        $ids = JourneyItem::where('journey_id', $journey_id)->pluck('id')->toArray();
+        $ids = JourneyItem::where('journey_id', $journey_id)->orderBy('id')->pluck('id')->toArray();
         $no = array_search($item->id, $ids) + 1;
 
-        return view('journey.image', compact('item', 'prev_item', 'next_item', 'no', 'total'));
+        return view('journey.image', compact('journey', 'item', 'prev_item', 'next_item', 'no', 'total'));
     }
 }

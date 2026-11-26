@@ -95,6 +95,9 @@ use App\Models\JourneyItem;
         <a href="{{ url('journey/chart/'.$select_journey->id) }}" class="inline-flex items-center rounded-md bg-amber-600 px-3 py-2 text-white hover:bg-amber-500" target="_blank" aria-label="Performance charts">
             <i class="fas fa-chart-line"></i>
         </a>
+        <a href="{{ url('journey/'.$select_journey->id.'/a-plus') }}" class="inline-flex items-center rounded-md bg-emerald-600 px-3 py-2 text-white hover:bg-emerald-500" aria-label="A+ setups" title="A+ setups" target="_blank" rel="noopener">
+            <i class="fas fa-star"></i>
+        </a>
 </div>
 <div class="mt-4 space-y-1 text-sm font-semibold text-rose-400">
     <p>*** Execution Performance NOT Trading Performance ***</p>

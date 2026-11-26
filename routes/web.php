@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('journey/image/{journey_id}/{journey_item_id}', [JourneyController::class, 'image']);
     Route::get('journey/chart/{journey_id}', [JourneyController::class, 'chart']);
+    Route::get('journey/{journey_id}/a-plus', [JourneyController::class, 'aPlus']);
     Route::post('journey/note', [JourneyController::class, 'note']);
     Route::post('journey/default', [JourneyController::class, 'default']);
     Route::get('journey/delete/{journey_id}/{edit_journey_item_id}', [JourneyController::class, 'delete']);
